@@ -1,0 +1,107 @@
+﻿@model eShop.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.customerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.orderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.orderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.town)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.town)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.custFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.custFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.custLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.custLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliverycost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliverycost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.orderID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

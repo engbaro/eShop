@@ -1,0 +1,94 @@
+﻿@model IEnumerable<eShop.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.customerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.orderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.town)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.custFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.custLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deliverycost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.customerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.orderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.town)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.totalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.custFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.custLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deliverycost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.orderID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.orderID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.orderID })
+        </td>
+    </tr>
+}
+
+</table>
