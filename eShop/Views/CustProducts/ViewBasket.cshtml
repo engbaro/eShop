@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<eShop.Models.OrderItem>
+   <div class="col-md-9">
+       @if(ViewBag.message != null)
+       {
+       <br/>
+       <br/>
+      
+       <div class="alert alert-danger" role="alert">@ViewBag.message</div>
+       
+       }
+       else{
+       
+       <table class="basket-table">
+           <thead>
+           <th>Product Photo</th>
+           <th>Product name</th>
+           <th>Product Price</th>
+           <th>Delete product</th>
+
+           </thead>
+           <tbody>
+               @foreach (var item in Model)
+               {
+                   var productID = @item.productID;
+                   <tr class="basket-row">
+                       <td>
+                           <a href="#" class="thumbnail">
+                               <img src="~/Content/Images/test.jpg" alt="productImage">
+                           </a>
+                       </td>
+                       <td>
+                           @foreach (var product in ViewBag.allProducts)
+                           {
+                               if (@product.Id == productID)
+                               {
+                                   @product.Description
+                               }
+
+                           }
+                       </td>
+
+                   </tr>
+               }
+
+           </tbody>
+
+       </table>
+
+       }
+
+   </div>

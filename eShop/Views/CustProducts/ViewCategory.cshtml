@@ -1,0 +1,37 @@
+﻿
+@model IEnumerable<eShop.Models.Product>
+
+    <div class="row">
+        @foreach (var item in Model)
+            {
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/320x150" alt="">
+                    <div class="caption">
+                        <h4 class="pull-right">@item.Price</h4>
+                        <h4>
+                            <a href="@item.Id">@item.Name</a>
+                        </h4>
+                        <p>@item.Description </p>
+                        <br />
+                        <a href="@Url.Action("ViewProduct", "CustProducts",
+                         new { id = @item.Id})" class="btn btn-success view-product" id="@item.Id">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </div>
+                    <div class="ratings">
+                        <!--<p class="pull-right">15 reviews</p>
+                         <p>
+                             <span class="glyphicon glyphicon-star"></span>
+                             <span class="glyphicon glyphicon-star"></span>
+                             <span class="glyphicon glyphicon-star"></span>
+                             <span class="glyphicon glyphicon-star"></span>
+                             <span class="glyphicon glyphicon-star"></span>
+                         </p>-->
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+

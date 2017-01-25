@@ -24,8 +24,10 @@ namespace eShop.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
+        public int categoryID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems1 { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

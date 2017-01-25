@@ -17,7 +17,7 @@ namespace eShop.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Order()
         {
-            this.OrderItems1 = new HashSet<OrderItem>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
     
         public int orderID { get; set; }
@@ -29,12 +29,13 @@ namespace eShop.Models
         public string postcode { get; set; }
         public string phone { get; set; }
         public double totalPrice { get; set; }
-        public string custFirstName { get; set; }
-        public string custLastName { get; set; }
-        public string deliverycost { get; set; }
+        public string custName { get; set; }
+        public double deliverycost { get; set; }
         public string notes { get; set; }
+        public int companyID { get; set; }
     
+        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> OrderItems1 { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }
