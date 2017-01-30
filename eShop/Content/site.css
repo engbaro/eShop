@@ -2,19 +2,61 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
-a {
+
+a,a:hover,a:focus {
    color: #555;
 }
-.basket{
- color:white;
- float:right;
+
+.list-group a {
+ border:0px;
+
 }
-.basket:hover {
-     color:#bfd8d9;
+
+ .list-group a:hover::after, .list-group a:focus::after {
+    opacity:1;
+        }
+ .list-group a::after {
+        bottom: 0;
+        -webkit-transform: translateY(10px);
+        -moz-transform: translateY(10px);
+        transform: translateY(10px);
+    }
+.list-group a:after {
+    position: absolute;
+    width: 50%;
+   
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 3px;
+    background: cadetblue;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+    -moz-transition: opacity 0.3s, -moz-transform 0.3s;
+    transition: opacity 0.3s, transform 0.3s;
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+a.basket, a.nav-link{
+ color:white !important;
+}
+.basket {
+    float:right;
+}
+a.basket:hover, a.nav-link:hover{
+     color:#bfd8d9 !important;
 }
 .main-nav {
     background-color:cadetblue;
 }
+/*basket thumbnail*/
+.img-thumbnail{
+    width:100px;
+    height:100px;
+}
+
 /*nav bar top**/
 @media (min-width: 768px)
 .fixed-top {
@@ -298,3 +340,9 @@ fieldset[disabled] .btn-primary.active {
 	max-height: 155px;
 }
 
+.hide {
+display:none;
+}
+.popover {
+    max-width:60% !important;
+}

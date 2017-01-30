@@ -1,11 +1,6 @@
 ﻿
 @model IEnumerable<eShop.Models.OrderItem>
    <div class="col-md-9">
-
-
-       <div class="error">
-
-       </div>
        @if(ViewBag.message != null)
        {
        <br/>
@@ -40,13 +35,13 @@
                            {
                                if (@product.Id == productID)
                                {
-                                   @product.Name
+                                   @product.Description
                                }
 
                            }
                        </td>
                        <td class="col-md-2">@item.price</td>
-                       <td class="col-md-2"><a class="remove-item" id="@item.orderItemID"> <i class="fa fa-times fa-lg" aria-hidden="true"></i></a>  </td>
+                       <td class="col-md-2"><a href="#" class="remove-item" id="@item.orderItemID"> <i class="fa fa-times fa-lg" aria-hidden="true"></i></a></td>
                    </tr>
                }
 
@@ -54,10 +49,6 @@
 
        </table>
 
-
-       <br/>
-       <br/>
-       <a href="@Url.Action("LoginForms", "CustLogin")" class="checkout btn btn-primary">proceed to checkout</a>
        }
 
    </div>

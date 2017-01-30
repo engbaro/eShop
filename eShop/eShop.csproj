@@ -198,10 +198,10 @@
     <Compile Include="Controllers\AdminOrdersController.cs" />
     <Compile Include="Controllers\AdminProductsController.cs" />
     <Compile Include="Controllers\AdminOrderItemsController.cs" />
+    <Compile Include="Controllers\CustLoginController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\CustProductsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -280,6 +280,8 @@
     <Content Include="Views\CustProducts\OrderProduct.cshtml" />
     <Content Include="Views\CustProducts\ViewBasket.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\CustProducts\RemoveFromBasket.cshtml" />
+    <Content Include="Views\CustLogin\LoginForms.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -290,6 +292,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\App_LocalResources\" />
+    <Folder Include="obj\" />
     <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
