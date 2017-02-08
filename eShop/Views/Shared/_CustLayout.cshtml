@@ -57,7 +57,7 @@
                   
           
     <!-- Page Content -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-3">
 
@@ -69,14 +69,14 @@
                     }                 
                 </div>
             </div>
-            <div class="col-md-9" id="page-content">
+            <div class="col-md-9"  id="page-content">
                 @RenderBody()
             </div>
         </div>
     </div>
 
     <!-- /.container -->
-    <div class="container">
+    <div class="container-fluid">
         <hr>
         <!-- Footer -->
         <footer>
@@ -89,8 +89,10 @@
     </div>
     <!-- /.container -->
     <!-- jQuery -->
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>

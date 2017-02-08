@@ -1,0 +1,56 @@
+﻿@model eShop.Models.Customer
+<div class="col-md-9 float-left">
+  <h2>delivery adress</h2>
+   <div class="delivery-address">
+     @Model.CustName<br/>
+     @Model.Address<br/>
+     @Model.City<br/>
+     @Model.Postcode<br/>
+     @Model.Country<br/>
+     @Model.Phone<br/>
+   </div>
+    <div class="delivery-address-alternative">
+
+    </div>
+     <button class="btn-default"> Change Delivery Information</button>
+     <a href="@Url.Action("ConfirmCheckout", "Checkout")" class="btn btn-primary">place order</a>
+</div>
+<div class="col-md-3 float-right">
+    <div class="col-md-9">
+            <table class="basket-table col-md-12">
+                <thead>
+                    <tr>
+                        <h2>Items</h2>
+                        <a href="@Url.Action("ViewBasket", "CustProducts")" class="btn">Edit</a>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.allProducts)
+                    {
+                        var productID = @item.Id;
+                        <tr class="basket-row">
+                            <td class="col-md-4">
+                                <a href="#" class="thumbnail">
+                                    <img src="~/Content/Images/test.jpg" alt="productImage" class="img-thumbnail">
+                                </a>
+                            </td>
+                            <td class="col-md-4">
+                               <h2>@item.price</h2>
+                                @item.Name
+                            </td>      
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td class="col-sm-9">Subtotal</td>
+                        <td class="col-sm-3">@ViewBag.totalPrice</td>
+                    </tr>
+                    <tr>
+                        <td class="col-sm-9">delivery</td>
+                        <td class="col-sm-3">iqd 5000</td>
+                    </tr>                 
+                </tfoot>
+            </table>
+    </div>
+</div>

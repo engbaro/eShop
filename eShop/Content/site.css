@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+        background-color: #f5f8fa;
 }
 
 a,a:hover,a:focus {
@@ -40,7 +41,7 @@ a,a:hover,a:focus {
     transform: translateY(-10px);
 }
 a.basket, a.nav-link{
- color:white !important;
+ color:#63947E !important;
 }
 .basket {
     float:right;
@@ -49,7 +50,7 @@ a.basket:hover, a.nav-link:hover{
      color:#bfd8d9 !important;
 }
 .main-nav {
-    background-color:cadetblue;
+    background:0 0;
 }
 /*basket thumbnail*/
 .img-thumbnail{

@@ -1,22 +1,6 @@
 ﻿var baseURL='http://localhost:52134/';
 $(document).ready(function () {
 
-    	
-
-
-        $('#login').popover({ 
-            html : true,
-            content: function() {
-                return $("#login-form").html();
-            }
-        });
-        $('#register').popover({
-            html: true,
-            content: function () {
-                return $("#register-form").html();
-            }
-        });
-
     //ajax remove item
     $(".remove-item").click(function () {
         var tr = $(this).closest("tr");
@@ -57,6 +41,37 @@ $(document).ready(function () {
    
   });//end of click
 
-
  
 });//ready
+
+function registerSuccess(response) {
+    debugger;
+    /*$('#register-form').addClass('show');
+    $('#register-form').removeClass('fade');*/
+    
+    $('.error').removeClass('hide').html(response.errorMessage);
+}
+
+function registerFailure() {
+    /*$('#register-form').addClass('show');
+    $('#register-form').removeClass('fade');*/
+    $('#phoneError').text(response);
+}
+
+function onComplete() {
+    debugger;
+}
+function loginSuccess(response) {
+    debugger;
+    /*$('#register-form').addClass('show');
+    $('#register-form').removeClass('fade');*/
+
+    $('.error').removeClass('hide').html(response.errorMessage);
+}
+
+function loginFailure() {
+    /*$('#register-form').addClass('show');
+    $('#register-form').removeClass('fade');*/
+    $('#phoneError').text(response);
+}
+
