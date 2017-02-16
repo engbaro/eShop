@@ -52,11 +52,11 @@ namespace eShop.Controllers
 
                 if (allItems.Count > 0)
                 {
-                    return RedirectToAction("checkoutPage", "Checkout");
+                    return Json(new { succes = "yes", url = Url.Action("CheckoutPage", "Checkout") });
                 }
                 else
                 {
-                    return RedirectToAction("HomePage", "CustProducts");
+                    return Json(new { succes = "yes", url = Url.Action("HomePage", "CustProducts") });
                 }
 
             }
@@ -92,7 +92,6 @@ namespace eShop.Controllers
             List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
             ViewBag.allCategories = allCategories;
             Customer user=db.Customers.First(c=>c.Phone==loginCustomer.Phone);
-
             if (user == null)
             {
                 return Json(new { sucess = "NotRegistered", errorMessage = "we don't have an account with this phone number. click <a href='#' id='register-from-login'>here</a> to register" });
@@ -107,14 +106,17 @@ namespace eShop.Controllers
                 else {
                     List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
                     Session["customer"] = verifyPassword;
-                    
+                    if (allItems == null)
+                    {
+                        return Json(new { succes = "yes", url = Url.Action("HomePage", "CustProducts") });
+                    }
                     if (allItems.Count > 0)
                     {
-                        return RedirectToAction("checkoutPage","Checkout");
+                        return Json(new { succes="yes", url = Url.Action("CheckoutPage", "Checkout") });
                     }
                     else
                     {
-                        return RedirectToAction("HomePage", "CustProducts");
+                        return Json(new { succes = "yes", url = Url.Action("HomePage", "CustProducts") });
                     }
                 }
 

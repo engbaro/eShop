@@ -16,7 +16,7 @@
                 </button>
             </div>
             <div class="modal-body">
-               @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", OnSuccess = "registerSuccess", OnFailure = "registerFailure", OnComplete = "onComplete" }))
+               @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", OnSuccess = "loginSuccess", OnFailure = "registerFailure", OnComplete = "onComplete" }))
                {
                     @Html.AntiForgeryToken()
 

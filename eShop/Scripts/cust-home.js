@@ -1,6 +1,16 @@
 ﻿var baseURL='http://localhost:52134/';
 $(document).ready(function () {
 
+   
+    $(window).scroll(function () { // check if scroll event happened
+        if ($(document).scrollTop() > 50) { // check if user scrolled more than 50 from top of the browser window
+            $(".main-nav").css("background-color", "#f8f8f8"); // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
+        } else {
+            $(".main-nav").css("background-color", "transparent"); // if not, change it back to transparent
+        }
+    });
+
+
     //ajax remove item
     $(".remove-item").click(function () {
         var tr = $(this).closest("tr");
@@ -25,7 +35,7 @@ $(document).ready(function () {
     });//end of click
 
   //ajax view category
-    $(".list-group-item").click(function () {
+    $(".category").click(function () {
 
         var id = $(this).attr('id');
     $.ajax({
@@ -63,10 +73,13 @@ function onComplete() {
 }
 function loginSuccess(response) {
     debugger;
-    /*$('#register-form').addClass('show');
-    $('#register-form').removeClass('fade');*/
-
-    $('.error').removeClass('hide').html(response.errorMessage);
+   
+    if (response.success = "yes") {
+        window.location.href =response.url;
+    }
+    else {
+        $('.error').removeClass('hide').html(response.errorMessage);
+    }
 }
 
 function loginFailure() {
@@ -74,4 +87,7 @@ function loginFailure() {
     $('#register-form').removeClass('fade');*/
     $('#phoneError').text(response);
 }
+
+
+
 

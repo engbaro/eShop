@@ -7,22 +7,26 @@
 a,a:hover,a:focus {
    color: #555;
 }
-
-.list-group a {
+.carousel-holder {
+    margin-left: auto;
+    margin-right: auto;
+    width: 860px;
+}
+.nav-item a {
  border:0px;
 
 }
 
- .list-group a:hover::after, .list-group a:focus::after {
+ .nav-item h2 a:hover::after, .list-group a:focus::after {
     opacity:1;
         }
- .list-group a::after {
+ .nav-item h2 a::after {
         bottom: 0;
         -webkit-transform: translateY(10px);
         -moz-transform: translateY(10px);
         transform: translateY(10px);
     }
-.list-group a:after {
+.nav-item h2 a:after {
     position: absolute;
     width: 50%;
    
@@ -61,7 +65,7 @@ a.basket:hover, a.nav-link:hover{
 /*nav bar top**/
 @media (min-width: 768px)
 .fixed-top {
-    padding: 25px 0;
+    padding:25px 0;
     -webkit-transition: padding .3s;
     -moz-transition: padding .3s;
     transition: padding .3s;
@@ -271,11 +275,6 @@ fieldset[disabled] .btn-primary.active {
 	border-radius: 0px;
 }
 
-.container-fluid{
-	max-width: 1140px;
-	margin: 0 auto;
-}
-
 .view-wrapper {
 	float: right;
 	max-width: 70%;
@@ -346,4 +345,8 @@ display:none;
 }
 .popover {
     max-width:60% !important;
+}
+
+.category {
+    text-transform:capitalize;
 }

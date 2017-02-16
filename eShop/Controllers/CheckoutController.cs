@@ -50,16 +50,66 @@ namespace eShop.Controllers
 
         public ActionResult ConfirmCheckout()
         {
-
-            Customer currentCustomer=(Customer)Session["customer"];
-            List<OrderItem> allItems=(List<OrderItem>)Session["OrderItem"];
-            double totalPrice=allItems.Sum(x => x.price);
-            Order newOrder=new Order() {  address=currentCustomer.Address, town=currentCustomer.City,postcode=currentCustomer.Postcode, notes="", country=currentCustomer.Country, custName=currentCustomer.CustName, orderDate=DateTime.Now, customerID=currentCustomer.CustomerID, phone=currentCustomer.Phone, deliverycost=3, companyID=1,totalPrice= totalPrice };
-            db.Orders.Add(newOrder);
-            db.SaveChanges();
-            allItems.ForEach(x => x.orderID = newOrder.orderID);
-            db.OrderItems.AddRange(allItems);
-            return View();
+            try
+            {
+                List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+                ViewBag.allCategories = allCategories;
+                Customer currentCustomer = (Customer)Session["customer"];
+                List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
+                double totalPrice = allItems.Sum(x => x.price);
+                Order newOrder = new Order() { address = currentCustomer.Address, town = currentCustomer.City, postcode = currentCustomer.Postcode, notes = "", country = currentCustomer.Country, custName = currentCustomer.CustName, orderDate = DateTime.Now, customerID = currentCustomer.CustomerID, phone = currentCustomer.Phone, deliverycost = 3, companyID = 1, totalPrice = totalPrice };
+                db.Orders.Add(newOrder);
+                db.SaveChanges();
+                allItems.ForEach(x => x.orderID = newOrder.orderID);
+                db.OrderItems.AddRange(allItems);
+                Session["OrderItem"]=null;
+                return View();
+            }
+            catch (Exception e) {
+             return View();
+            }
         }
-        }// end of the controller
+
+
+        public ActionResult ChangeAddress(Customer newAddress)
+        {
+            try
+            {
+
+                List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+                ViewBag.allCategories = allCategories;
+                Customer currentCustomer = (Customer)Session["customer"];
+                //add check here if session is empty
+
+                currentCustomer.Address=newAddress.Address;
+                currentCustomer.City=newAddress.City;
+                currentCustomer.Country=newAddress.Country;
+                currentCustomer.Phone = newAddress.Phone;
+                currentCustomer.CustName=newAddress.CustName;
+                Session["customer"]=currentCustomer;
+                /*
+                List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
+                double totalPrice = allItems.Sum(x => x.price);
+                Order newOrder = new Order() { address = currentCustomer.Address, town = currentCustomer.City, postcode = currentCustomer.Postcode, notes = "", country = currentCustomer.Country, custName = currentCustomer.CustName, orderDate = DateTime.Now, customerID = currentCustomer.CustomerID, phone = currentCustomer.Phone, deliverycost = 3, companyID = 1, totalPrice = totalPrice };
+                db.Orders.Add(newOrder);
+                db.SaveChanges();
+                allItems.ForEach(x => x.orderID = newOrder.orderID);
+                db.OrderItems.AddRange(allItems);
+                Session["OrderItem"] = null;
+                */
+                return RedirectToAction("CheckoutPage");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error in Change address");
+                return View();
+
+            }
+        }
+
+
+
+    }// end of the controller
+
+
 }

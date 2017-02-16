@@ -1,24 +1,25 @@
 ﻿
 @model IEnumerable<eShop.Models.Product>
 
-    <div class="row">
+    <div class="row col-md-8 view-category mx-auto">
         @foreach (var item in Model)
             {
-            <div class="col-sm-4 col-lg-4 col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
+            <div class="col-sm-4 col-lg-3 col-md-3">
+              
+                <a href="@Url.Action("ViewProduct", "CustProducts",
+                         new { id = @item.Id})" id="@item.Id">
+                    <img class="rounded" src="http://placehold.it/200x300" alt="@item.Name">
                     <div class="caption">
-                        <h4 class="pull-right">@item.Price</h4>
+                        <h4>$@item.Price</h4>
                         <h4>
-                            <a href="@item.Id">@item.Name</a>
+                            @item.Name
                         </h4>
                         <p>@item.Description </p>
                         <br />
-                        <a href="@Url.Action("ViewProduct", "CustProducts",
-                         new { id = @item.Id})" class="btn btn-success view-product" id="@item.Id">
-                            <i class="fa fa-eye"></i>
-                        </a>
                     </div>
+                 </a>
+                   
+                   
                     <div class="ratings">
                         <!--<p class="pull-right">15 reviews</p>
                          <p>
@@ -29,7 +30,7 @@
                              <span class="glyphicon glyphicon-star"></span>
                          </p>-->
                     </div>
-                </div>
+                
             </div>
         }
     </div>

@@ -1,7 +1,27 @@
-﻿$(document).ready(function () {
+﻿var hash = {
+    'png': 1,
+    'jpg': 1,
+    'PNG': 1,
+    'JPG': 1,
+};
 
 
- 
+$(document).ready(function () {
+
+    $('input[type="file"]').change(function (e) {
+
+        var re = /\..+$/;
+        var ext = e.target.files[0].name.match(re);
+        if (hash[ext]) {
+            $("#submit-product-photo").attr("disabled",false);
+            return true;
+        } else {
+            alert("Please uploas an image of type png, jpg.");
+            $("#submit-product-photo").attr("disabled", true);
+
+            return false;
+        }
+    });
 
   //ajax view product
   $("#view-products").click(function () {

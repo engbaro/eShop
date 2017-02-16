@@ -255,7 +255,7 @@
     </Content>
     <Content Include="Views\CustProducts\ViewAll.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\AdminMain\DashBoard.cshtml" />
     <Content Include="Views\AdminProducts\Create.cshtml" />
     <Content Include="Views\AdminProducts\Delete.cshtml" />
@@ -287,6 +287,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\CustProducts\RemoveFromBasket.cshtml" />
     <Content Include="Views\CustLogin\LoginForms.cshtml" />
+    <Content Include="Views\Checkout\CheckoutPage.cshtml" />
+    <Content Include="Views\Checkout\ConfirmCheckout.cshtml" />
+    <Content Include="Views\AdminProducts\UploadPhoto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -298,7 +301,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="obj\" />
-    <Folder Include="Views\Checkout\" />
     <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
