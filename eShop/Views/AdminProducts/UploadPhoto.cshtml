@@ -1,35 +1,23 @@
 ﻿@model eShop.Models.Product
-
-@{
-    ViewBag.Title = "Create";
-}
-
 <h2>Create</h2>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+<form action="/AdminProducts/UploadPhoto" method="post" enctype="multipart/form-data">
+
     <div class="form-horizontal">
         <h4>Product photos</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-             
-            <div class="col-md-10">
-           <input type="file" name="productImage" value="upload product image" />
-            </div>
-        </div>
-       <input type="hidden" name="Id" value="@Model.Id"/>
+                <input type="file" name="productImage" />
+
+        <input type="hidden" name="Id" value="@Model.Id" />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <button type="submit" id="submit-product-photo"  class="btn btn-secondary"> Upload</button>
+                <input type="submit" id="submit-product-photo" class="btn btn-secondary"> Upload</input>
             </div>
         </div>
     </div>
-}
+</form>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

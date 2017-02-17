@@ -13,6 +13,7 @@ namespace eShop.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.ComponentModel.DataAnnotations;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,8 +21,6 @@ namespace eShop.Models
         {
             this.OrderItems1 = new HashSet<OrderItem>();
         }
-
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
@@ -29,6 +28,7 @@ namespace eShop.Models
         public string Description { get; set; }
         public float Price { get; set; }
         public int categoryID { get; set; }
+        public string ImageLocation { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems1 { get; set; }

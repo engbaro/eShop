@@ -6,7 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Collections;
+using System.Collections.Specialized;
 using eShop.Models;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 
 namespace eShop.Controllers
 {
@@ -47,25 +53,89 @@ namespace eShop.Controllers
     public ActionResult Create()
     {
 
-      if (Request.IsAjaxRequest())
+       List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+       ViewBag.allCategories = allCategories;
+       if (Request.IsAjaxRequest())
       {
         return PartialView();
       }
       return View();
     }
+        public ActionResult UploadPhoto(Product product)
+        {
 
-    // POST: test/Create
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
+            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+            ViewBag.allCategories = allCategories;
+            
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView(product);
+            }
+            return View(product);
+        }
+
+        [HttpPost]
+        public ActionResult UploadPhoto(object sender, EventArgs e)
+        {
+            int productID = Int32.Parse(Request.Params["Id"]);
+            Product currentProduct=db.Products.FirstOrDefault(c=>c.Id==productID);
+            if (currentProduct == null) {
+                //throw new exception
+            }
+            var uploadFiles1 = Request.Files.Cast<HttpPostedFile>();
+            HttpPostedFileBase upload =Request.Files["productImage"];
+         
+               
+                if (upload != null && upload.ContentLength > 0) {
+
+                    String pathOriginals = Server.MapPath("~/product-images/originals");
+                    String pathThumbnails = Server.MapPath("~/product-images/Thumbnails");
+                
+                    if (!System.IO.Directory.Exists(pathOriginals))
+                    {
+                        System.IO.Directory.CreateDirectory(pathOriginals);
+                    }
+
+                if (!System.IO.Directory.Exists(pathThumbnails))
+                {
+                    System.IO.Directory.CreateDirectory(pathThumbnails);
+                }
+                string fileName = upload.FileName;
+               
+                String imageLocation=productID+"_"+ fileName;
+                upload.SaveAs(pathOriginals + "\\"+ imageLocation);
+                string imageLocationNoExtention = imageLocation.Substring(0, imageLocation.LastIndexOf('.'));
+
+                using (var srcImage = Image.FromFile(pathOriginals + "\\" + imageLocation))
+                using (var newImage = new Bitmap(200, 300))
+                using (var graphics = Graphics.FromImage(newImage))
+                using (var stream = new MemoryStream())
+                {
+                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    graphics.DrawImage(srcImage, new Rectangle(0, 0, 200, 300));
+                    newImage.Save(pathThumbnails + "\\" + imageLocationNoExtention+".png", ImageFormat.Png);
+                }
+               ;
+                currentProduct.ImageLocation = imageLocation;
+                db.SaveChanges();
+            }
+           
+            return RedirectToAction("Edit",productID);
+        }
+        // POST: test/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Create([Bind(Include = "Id,Name,Description,Price")] Product product)
+    public ActionResult Create([Bind(Include = "Id,Name,Description,Price,categoryID")] Product product)
     {
       if (ModelState.IsValid)
       {
         db.Products.Add(product);
         db.SaveChanges();
-        return RedirectToAction("Index");
+        return RedirectToAction("UploadPhoto",product);
       }
 
       if (Request.IsAjaxRequest())

@@ -65,6 +65,7 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Price" Type="real" Nullable="false" />
           <Property Name="categoryID" Type="int" Nullable="false" />
+          <Property Name="ImageLocation" Type="varchar" MaxLength="150" />
         </EntityType>
         <Association Name="FK_OrderItems_Orders">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
@@ -152,6 +153,7 @@
           <NavigationProperty Name="OrderItems1" Relationship="Model.FK_OrderItems_Products2" FromRole="Product" ToRole="OrderItem2" />
           <Property Name="categoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Model.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+          <Property Name="ImageLocation" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="DbModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Products" EntityType="Self.Product" />
@@ -290,6 +292,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="Model.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ImageLocation" ColumnName="ImageLocation" />
                 <ScalarProperty Name="categoryID" ColumnName="categoryID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />

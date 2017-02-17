@@ -1,15 +1,15 @@
 ﻿var hash = {
-    'png': 1,
-    'jpg': 1,
-    'PNG': 1,
-    'JPG': 1,
+    '.png': 1,
+    '.jpg': 1,
+    '.PNG': 1,
+    '.JPG': 1,
 };
 
 
 $(document).ready(function () {
 
     $('input[type="file"]').change(function (e) {
-
+        debugger;
         var re = /\..+$/;
         var ext = e.target.files[0].name.match(re);
         if (hash[ext]) {
