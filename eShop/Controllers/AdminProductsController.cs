@@ -82,44 +82,50 @@ namespace eShop.Controllers
             if (currentProduct == null) {
                 //throw new exception
             }
-            var uploadFiles1 = Request.Files.Cast<HttpPostedFile>();
-            HttpPostedFileBase upload =Request.Files["productImage"];
-         
-               
-                if (upload != null && upload.ContentLength > 0) {
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+
+
+                HttpPostedFileBase upload = Request.Files[i];
+
+
+                if (upload != null && upload.ContentLength > 0)
+                {
 
                     String pathOriginals = Server.MapPath("~/product-images/originals");
                     String pathThumbnails = Server.MapPath("~/product-images/Thumbnails");
-                
+
                     if (!System.IO.Directory.Exists(pathOriginals))
                     {
                         System.IO.Directory.CreateDirectory(pathOriginals);
                     }
 
-                if (!System.IO.Directory.Exists(pathThumbnails))
-                {
-                    System.IO.Directory.CreateDirectory(pathThumbnails);
-                }
-                string fileName = upload.FileName;
-               
-                String imageLocation=productID+"_"+ fileName;
-                upload.SaveAs(pathOriginals + "\\"+ imageLocation);
-                string imageLocationNoExtention = imageLocation.Substring(0, imageLocation.LastIndexOf('.'));
+                    if (!System.IO.Directory.Exists(pathThumbnails))
+                    {
+                        System.IO.Directory.CreateDirectory(pathThumbnails);
+                    }
+                    string fileName = upload.FileName;
+                    int lastIndex = fileName.LastIndexOf('.');
+                    string fileNameExtention = fileName.Substring(lastIndex+1);
+                    String imageLocation = productID + "_" + i+"."+fileNameExtention;
+                    upload.SaveAs(pathOriginals + "\\" + imageLocation);
+                    string imageLocationNoExtention = imageLocation.Substring(0, imageLocation.LastIndexOf('.'));
 
-                using (var srcImage = Image.FromFile(pathOriginals + "\\" + imageLocation))
-                using (var newImage = new Bitmap(200, 300))
-                using (var graphics = Graphics.FromImage(newImage))
-                using (var stream = new MemoryStream())
-                {
-                    graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-                    graphics.DrawImage(srcImage, new Rectangle(0, 0, 200, 300));
-                    newImage.Save(pathThumbnails + "\\" + imageLocationNoExtention+".png", ImageFormat.Png);
-                }
+                    using (var srcImage = Image.FromFile(pathOriginals + "\\" + imageLocation))
+                    using (var newImage = new Bitmap(200, 300))
+                    using (var graphics = Graphics.FromImage(newImage))
+                    using (var stream = new MemoryStream())
+                    {
+                        graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                        graphics.DrawImage(srcImage, new Rectangle(0, 0, 200, 300));
+                        newImage.Save(pathThumbnails + "\\" + imageLocationNoExtention + ".png", ImageFormat.Png);
+                    }
                ;
-                currentProduct.ImageLocation = imageLocation;
-                db.SaveChanges();
+                    currentProduct.ImageLocation = imageLocation;
+                    db.SaveChanges();
+                }
             }
            
             return RedirectToAction("Edit",productID);

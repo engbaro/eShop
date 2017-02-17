@@ -7,11 +7,14 @@
     <div class="form-horizontal">
         <h4>Product photos</h4>
         <hr />
-                <input type="file" name="productImage" />
+        <input type="file" name="productImage" class="files"/>
 
         <input type="hidden" name="Id" value="@Model.Id" />
+        <button type="button" id="add-more-photos" class="btn btn-default">add another photo</button>
+        <div class="add-more-photos-div">
 
-        <div class="form-group">
+        </div>
+         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" id="submit-product-photo" class="btn btn-secondary"> Upload</input>
             </div>

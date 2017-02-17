@@ -8,6 +8,11 @@
 
 $(document).ready(function () {
 
+    $("#add-more-photos").click(function () {
+        if ($('.files').length < 5) {
+            $(".add-more-photos-div").append('<input type="file" name="productImage" class="files"/> <br/>');
+        }
+     })
     $('input[type="file"]').change(function (e) {
         debugger;
         var re = /\..+$/;
