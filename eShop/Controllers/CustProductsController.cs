@@ -120,6 +120,9 @@ namespace eShop.Controllers
 
             List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
             List<Product> allProducts = db.Products.Where(c => c.categoryID == id).ToList();
+            List<int> allProductsIds=allProducts.Select(c=>c.Id).ToList();
+            List<ProductImage> images =db.ProductImages.Where(c=>allProductsIds.Contains(c.ProductId)).Where(c => c.main==true).ToList();
+            
             if (!allProducts.Any() || allProducts == null)
             {
                 return HttpNotFound();
@@ -127,6 +130,7 @@ namespace eShop.Controllers
             else
             {
                 ViewBag.allCategories = allCategories;
+                ViewBag.images = images;
                 if (Request.IsAjaxRequest())
                 {
                     return (PartialView(allProducts));

@@ -77,24 +77,26 @@ namespace eShop.Controllers
         [HttpPost]
         public ActionResult UploadPhoto(object sender, EventArgs e)
         {
+            
             int productID = Int32.Parse(Request.Params["Id"]);
             Product currentProduct=db.Products.FirstOrDefault(c=>c.Id==productID);
             if (currentProduct == null) {
                 //throw new exception
+                //undone
             }
+
+            //undone
+            //Check if the product has uploaded 5 photos then will display danger message and should not display the form.
+
+
+
             for (int i = 0; i < Request.Files.Count; i++)
             {
-
-
                 HttpPostedFileBase upload = Request.Files[i];
-
-
                 if (upload != null && upload.ContentLength > 0)
                 {
-
                     String pathOriginals = Server.MapPath("~/product-images/originals");
                     String pathThumbnails = Server.MapPath("~/product-images/Thumbnails");
-
                     if (!System.IO.Directory.Exists(pathOriginals))
                     {
                         System.IO.Directory.CreateDirectory(pathOriginals);
@@ -104,13 +106,18 @@ namespace eShop.Controllers
                     {
                         System.IO.Directory.CreateDirectory(pathThumbnails);
                     }
+                    //changing the name of the photo to productID_i.ext(png,jpeg,...)
                     string fileName = upload.FileName;
                     int lastIndex = fileName.LastIndexOf('.');
                     string fileNameExtention = fileName.Substring(lastIndex+1);
                     String imageLocation = productID + "_" + i+"."+fileNameExtention;
                     upload.SaveAs(pathOriginals + "\\" + imageLocation);
                     string imageLocationNoExtention = imageLocation.Substring(0, imageLocation.LastIndexOf('.'));
+                    ProductImage image=new ProductImage() {   ProductId=productID, ImageLocation=imageLocation,main=true};
+                    db.ProductImages.Add(image);
+                    db.SaveChanges();
 
+                    //creating a thumbnail and save it 
                     using (var srcImage = Image.FromFile(pathOriginals + "\\" + imageLocation))
                     using (var newImage = new Bitmap(200, 300))
                     using (var graphics = Graphics.FromImage(newImage))
@@ -120,14 +127,13 @@ namespace eShop.Controllers
                         graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
                         graphics.DrawImage(srcImage, new Rectangle(0, 0, 200, 300));
-                        newImage.Save(pathThumbnails + "\\" + imageLocationNoExtention + ".png", ImageFormat.Png);
-                    }
-               ;
+                        newImage.Save(pathThumbnails + "\\" + imageLocation);
+                        // newImage.Save(pathThumbnails + "\\" + imageLocationNoExtention + ".png", ImageFormat.Png);
+                    };
                     currentProduct.ImageLocation = imageLocation;
                     db.SaveChanges();
                 }
             }
-           
             return RedirectToAction("Edit",productID);
         }
         // POST: test/Create

@@ -56,6 +56,20 @@
           <Property Name="notes" Type="nvarchar" MaxLength="500" />
           <Property Name="companyID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'eShop-Dev.dbo.ProductImages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProductImages">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="ImageLocation" />
+            <PropertyRef Name="main" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ImageLocation" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="main" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
@@ -103,6 +117,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductImages_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="ProductImages" Type="Self.ProductImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductImages">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Products_Categories">
           <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
@@ -121,6 +147,14 @@
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductImages" EntityType="Self.ProductImages" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductImages].[Id] AS [Id], 
+    [ProductImages].[ProductId] AS [ProductId], 
+    [ProductImages].[ImageLocation] AS [ImageLocation], 
+    [ProductImages].[main] AS [main]
+    FROM [dbo].[ProductImages] AS [ProductImages]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_OrderItems_Orders" Association="Self.FK_OrderItems_Orders">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="OrderItems" EntitySet="OrderItems" />
@@ -132,6 +166,10 @@
           <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductImages_Products" Association="Self.FK_ProductImages_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductImages" EntitySet="ProductImages" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
             <End Role="Categories" EntitySet="Categories" />
@@ -154,6 +192,7 @@
           <Property Name="categoryID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Model.FK_Products_Categories" FromRole="Product" ToRole="Category" />
           <Property Name="ImageLocation" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductImages" Relationship="Model.FK_ProductImages_Products" FromRole="Product" ToRole="ProductImage" />
         </EntityType>
         <EntityContainer Name="DbModel" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Products" EntityType="Self.Product" />
@@ -176,6 +215,11 @@
           <AssociationSet Name="FK_OrderItems_Orders" Association="Model.FK_OrderItems_Orders">
             <End Role="Order" EntitySet="Orders" />
             <End Role="OrderItem" EntitySet="OrderItems" />
+          </AssociationSet>
+          <EntitySet Name="ProductImages" EntityType="Model.ProductImage" />
+          <AssociationSet Name="FK_ProductImages_Products" Association="Model.FK_ProductImages_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductImage" EntitySet="ProductImages" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="OrderItem">
@@ -283,6 +327,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="ImageLocation" />
+            <PropertyRef Name="main" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="ImageLocation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Model.FK_ProductImages_Products" FromRole="ProductImage" ToRole="Product" />
+          <Property Name="main" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProductImages_Products">
+          <End Type="Model.Product" Role="Product" Multiplicity="1" />
+          <End Type="Model.ProductImage" Role="ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -353,6 +422,16 @@
                 <ScalarProperty Name="orderDate" ColumnName="orderDate" />
                 <ScalarProperty Name="customerID" ColumnName="customerID" />
                 <ScalarProperty Name="orderID" ColumnName="orderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductImages">
+            <EntityTypeMapping TypeName="Model.ProductImage">
+              <MappingFragment StoreEntitySet="ProductImages">
+                <ScalarProperty Name="main" ColumnName="main" />
+                <ScalarProperty Name="ImageLocation" ColumnName="ImageLocation" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
