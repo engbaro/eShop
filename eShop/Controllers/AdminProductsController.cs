@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections;
 using System.Collections.Specialized;
-using eShop.Models;
+using eShop.Model;
 using System.Drawing;
 using System.IO;
 using System.Drawing.Drawing2D;
@@ -18,7 +18,7 @@ namespace eShop.Controllers
 {
     public class AdminProductsController : Controller
   {
-        private DbModel db =new DbModel();
+        private FirdoosModel db =new FirdoosModel();
 
     // GET: test
     public ActionResult ViewAll()
@@ -53,7 +53,7 @@ namespace eShop.Controllers
     public ActionResult Create()
     {
 
-       List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+       List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
        ViewBag.allCategories = allCategories;
        if (Request.IsAjaxRequest())
       {
@@ -64,7 +64,7 @@ namespace eShop.Controllers
         public ActionResult UploadPhoto(Product product)
         {
 
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             ViewBag.allCategories = allCategories;
             
             if (Request.IsAjaxRequest())
@@ -113,7 +113,7 @@ namespace eShop.Controllers
                     String imageLocation = productID + "_" + i+"."+fileNameExtention;
                     upload.SaveAs(pathOriginals + "\\" + imageLocation);
                     string imageLocationNoExtention = imageLocation.Substring(0, imageLocation.LastIndexOf('.'));
-                    ProductImage image=new ProductImage() {   ProductId=productID, ImageLocation=imageLocation,main=true};
+                    ProductImage image=new ProductImage() {   ProductId=productID, ImageLocation=imageLocation,Main=true};
                     db.ProductImages.Add(image);
                     db.SaveChanges();
 
@@ -130,8 +130,8 @@ namespace eShop.Controllers
                         newImage.Save(pathThumbnails + "\\" + imageLocation);
                         // newImage.Save(pathThumbnails + "\\" + imageLocationNoExtention + ".png", ImageFormat.Png);
                     };
-                    currentProduct.ImageLocation = imageLocation;
-                    db.SaveChanges();
+                    //currentProduct.ImageLocation = imageLocation;
+                    //db.SaveChanges();
                 }
             }
             return RedirectToAction("Edit",productID);

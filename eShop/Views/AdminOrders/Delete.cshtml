@@ -1,4 +1,4 @@
-﻿@model eShop.Models.Order
+﻿@model eShop.Model.Order
 
 @{
     ViewBag.Title = "Delete";
@@ -13,91 +13,83 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.customerID)
+            @Html.DisplayNameFor(model => model.CustomerId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.customerID)
+            @Html.DisplayFor(model => model.CustomerId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.orderDate)
+            @Html.DisplayNameFor(model => model.OrderDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.orderDate)
+            @Html.DisplayFor(model => model.OrderDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.address)
+            @Html.DisplayNameFor(model => model.Address)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.address)
+            @Html.DisplayFor(model => model.Address)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.town)
+            @Html.DisplayNameFor(model => model.Town)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.town)
+            @Html.DisplayFor(model => model.Town)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.country)
+            @Html.DisplayNameFor(model => model.Country)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.country)
+            @Html.DisplayFor(model => model.Country)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.postcode)
+            @Html.DisplayNameFor(model => model.Postcode)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.postcode)
+            @Html.DisplayFor(model => model.Postcode)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.phone)
+            @Html.DisplayNameFor(model => model.Phone)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.phone)
+            @Html.DisplayFor(model => model.Phone)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.totalPrice)
+            @Html.DisplayNameFor(model => model.TotalPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.totalPrice)
+            @Html.DisplayFor(model => model.TotalPrice)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.custFirstName)
+            @Html.DisplayNameFor(model => model.CustomerName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.custFirstName)
+            @Html.DisplayFor(model => model.CustomerName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.custLastName)
+            @Html.DisplayNameFor(model => model.DeliveryCost)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.custLastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.deliverycost)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.deliverycost)
+            @Html.DisplayFor(model => model.DeliveryCost)
         </dd>
 
     </dl>

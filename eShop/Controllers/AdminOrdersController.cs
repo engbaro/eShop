@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using eShop.Models;
+using eShop.Model;
 
 namespace eShop.Controllers
 {
     public class AdminOrdersController : Controller
     {
-        private DbModel db = new DbModel();
+        private FirdoosModel db = new FirdoosModel();
 
         // GET: AdminOrders
         public async Task<ActionResult> ViewAll()

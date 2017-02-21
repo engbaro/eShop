@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eShop.Models.OrderItem>
+﻿@model IEnumerable<eShop.Model.OrderItem>
 
 @{
     ViewBag.Title = "Index";
@@ -13,10 +13,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.price)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Order.address)
+            @Html.DisplayNameFor(model => model.Order.Address)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Product.Name)
@@ -27,18 +27,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.price)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Order.address)
+            @Html.DisplayFor(modelItem => item.Order.Address)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Product.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.orderItemID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.orderItemID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.orderItemID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id})
         </td>
     </tr>
 }

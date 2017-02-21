@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eShop.Models.Order>
+﻿@model IEnumerable<eShop.Model.Order>
 
 @{
     ViewBag.Title = "Index";
@@ -13,37 +13,35 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.customerID)
+            @Html.DisplayNameFor(model => model.CustomerId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.orderDate)
+            @Html.DisplayNameFor(model => model.OrderDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.address)
+            @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.town)
+            @Html.DisplayNameFor(model => model.Town)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.country)
+            @Html.DisplayNameFor(model => model.Country)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.postcode)
+            @Html.DisplayNameFor(model => model.Postcode)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.phone)
+            @Html.DisplayNameFor(model => model.Phone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.totalPrice)
+            @Html.DisplayNameFor(model => model.TotalPrice)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.custFirstName)
+            @Html.DisplayNameFor(model => model.CustomerName)
         </th>
+       
         <th>
-            @Html.DisplayNameFor(model => model.custLastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.deliverycost)
+            @Html.DisplayNameFor(model => model.DeliveryCost)
         </th>
         <th></th>
     </tr>
@@ -51,42 +49,39 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.customerID)
+            @Html.DisplayFor(modelItem => item.CustomerId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.orderDate)
+            @Html.DisplayFor(modelItem => item.OrderDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.address)
+            @Html.DisplayFor(modelItem => item.Address)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.town)
+            @Html.DisplayFor(modelItem => item.Town)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.country)
+            @Html.DisplayFor(modelItem => item.Country)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.postcode)
+            @Html.DisplayFor(modelItem => item.Postcode)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.phone)
+            @Html.DisplayFor(modelItem => item.Phone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.totalPrice)
+            @Html.DisplayFor(modelItem => item.TotalPrice)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.custFirstName)
+            @Html.DisplayFor(modelItem => item.CustomerName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.custLastName)
+            @Html.DisplayFor(modelItem => item.DeliveryCost)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.deliverycost)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.orderID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.orderID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.orderID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

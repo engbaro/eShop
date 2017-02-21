@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<eShop.Models.OrderItem>
+@model IEnumerable<eShop.Model.OrderItem>
    <div class="col-md-9">
 
 
@@ -28,7 +28,7 @@
            <tbody>
                @foreach (var item in Model)
                {
-                   var productID = @item.productID;
+                   var productID = @item.ProductId;
                    <tr class="basket-row">
                        <td class="col-md-4">
                            <a href="#" class="thumbnail">
@@ -45,8 +45,8 @@
 
                            }
                        </td>
-                       <td class="col-md-2">@item.price</td>
-                       <td class="col-md-2"><a class="remove-item" id="@item.orderItemID"> <i class="fa fa-times fa-lg" aria-hidden="true"></i></a>  </td>
+                       <td class="col-md-2">@item.Price</td>
+                       <td class="col-md-2"><a class="remove-item" id="@item.Id"> <i class="fa fa-times fa-lg" aria-hidden="true"></i></a>  </td>
                    </tr>
                }
 

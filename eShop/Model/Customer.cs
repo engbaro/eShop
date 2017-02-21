@@ -17,8 +17,10 @@ namespace eShop.Model
     public int Id { get; set; }
         [Required]
         public int CompanyId { get; set; }
+        [Required]
+        public int CustomerId { get; set; }
 
-    [Required]
+        [Required]
     public string Name { get; set; }
 
     [Required]

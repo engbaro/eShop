@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using eShop.Models;
+using eShop.Model;
 
 
 namespace eShop.Controllers
 {
     public class CustProductsController : Controller
     {
-        private DbModel db = new DbModel();
+        private FirdoosModel db = new FirdoosModel();
 
 
         public ActionResult ViewBasket()
         {
             try
             {
-                List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+                List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
 
                 ViewBag.allCategories = allCategories;
                 if (Session["OrderItem"] == null)
@@ -31,7 +31,7 @@ namespace eShop.Controllers
                 {
                     List<OrderItem> allOrderItems = (List<OrderItem>)Session["OrderItem"];
 
-                    int[] allOrderItemsProductsIDs = allOrderItems.Select(c => c.productID).ToArray();
+                    int[] allOrderItemsProductsIDs = allOrderItems.Select(c => c.ProductId).ToArray();
                     if (!allOrderItems.Any() || allOrderItems == null)
                     {
                         ViewBag.message = "There are no items in your basket.";
@@ -85,12 +85,12 @@ namespace eShop.Controllers
                 list = (List<OrderItem>)Session["OrderItem"];
                 count = (int)Session["itemCount"];
             }
-            list.Add(new OrderItem() { orderItemID = count, quantity = 1, price = product.Price, productID = product.Id });
+            list.Add(new OrderItem() { Id = count, Quantity = 1, Price = product.Price, ProductId = product.Id });
             count++;
             Session["OrderItem"] = list;
             Session["itemCount"] = count;
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
-            List<Product> allProducts = db.Products.Where(c => c.categoryID == product.categoryID).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
+            List<Product> allProducts = db.Products.Where(c => c.CategoryId == product.CategoryId).ToList();
             ViewBag.allCategories = allCategories;
             return View(allProducts);
         }
@@ -99,9 +99,9 @@ namespace eShop.Controllers
         // GET: CustProduct
         public ActionResult ViewAll()
         {
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
-            List<int> allCatIDs = db.Categories.Where(c => c.companyID == 1).Select(c => c.categoryID).ToList();
-            List<Product> allProducts = db.Products.Where(c => allCatIDs.Contains(c.categoryID)).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
+            List<int> allCatIDs = db.Categories.Where(c => c.CompanyId == 1).Select(c => c.Id).ToList();
+            List<Product> allProducts = db.Products.Where(c => allCatIDs.Contains(c.CategoryId)).ToList();
             if (!allProducts.Any() || allProducts == null)
             {
                 return HttpNotFound();
@@ -118,10 +118,10 @@ namespace eShop.Controllers
         public ActionResult ViewCategory(int id)
         {
 
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
-            List<Product> allProducts = db.Products.Where(c => c.categoryID == id).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
+            List<Product> allProducts = db.Products.Where(c => c.CategoryId == id).ToList();
             List<int> allProductsIds=allProducts.Select(c=>c.Id).ToList();
-            List<ProductImage> images =db.ProductImages.Where(c=>allProductsIds.Contains(c.ProductId)).Where(c => c.main==true).ToList();
+            List<ProductImage> images =db.ProductImages.Where(c=>allProductsIds.Contains(c.ProductId)).Where(c => c.Main==true).ToList();
             
             if (!allProducts.Any() || allProducts == null)
             {
@@ -145,7 +145,7 @@ namespace eShop.Controllers
             {
                 //Throw error
             }
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             Product product = db.Products.FirstOrDefault(c => c.Id == id);
             if (product == null)
             {
@@ -165,7 +165,7 @@ namespace eShop.Controllers
         // GET: CustProduct
         public ActionResult HomePage()
         {
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             if (!allCategories.Any())
             {
                 return HttpNotFound();
@@ -185,7 +185,7 @@ namespace eShop.Controllers
         {
             try
             {
-                List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+                List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
                 if (!allCategories.Any())
                 {
                     throw new Exception();
@@ -198,7 +198,7 @@ namespace eShop.Controllers
 
                 List<OrderItem> allOrderItems = (List<OrderItem>)Session["OrderItem"];
 
-                OrderItem removedItem = allOrderItems.FirstOrDefault(c => c.orderItemID == id);
+                OrderItem removedItem = allOrderItems.FirstOrDefault(c => c.Id == id);
                 if (removedItem == null)
                 {
                     throw new Exception();
@@ -208,7 +208,7 @@ namespace eShop.Controllers
                 {
                     return Json(new { empty = true, message = "There are no items in your basket." });
                 }
-                int[] allOrderItemsProductsIDs = allOrderItems.Select(c => c.productID).ToArray();
+                int[] allOrderItemsProductsIDs = allOrderItems.Select(c => c.ProductId).ToArray();
                 List<Product> allProducts = db.Products.Where(c => allOrderItemsProductsIDs.Contains(c.Id)).ToList();
                 ViewBag.allProducts = allProducts;
                 return Json(new { empty = false, message = "An item was removed from your basket" });

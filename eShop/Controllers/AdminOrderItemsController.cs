@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using eShop.Models;
+using eShop.Model;
 
 namespace eShop.Controllers
 {
     public class AdminOrderItemsController : Controller
     {
-        private DbModel db = new DbModel();
+        private FirdoosModel db = new FirdoosModel();
 
         // GET: OrderItems
         public async Task<ActionResult> ViewAll()
@@ -41,7 +41,7 @@ namespace eShop.Controllers
         public ActionResult Create(Order order)
         {
 
-            ViewBag.orderID =order.orderID;
+            ViewBag.orderID =order.Id;
             ViewBag.productsList=db.Products.Select(r => r.Name);
      
             if (Request.IsAjaxRequest())
@@ -67,8 +67,8 @@ namespace eShop.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.orderID = new SelectList(db.Orders, "orderID", "address", orderItem.orderID);
-            ViewBag.productID = new SelectList(db.Products, "Id", "Name", orderItem.productID);
+            ViewBag.orderID = new SelectList(db.Orders, "orderID", "address", orderItem.OrderId);
+            ViewBag.productID = new SelectList(db.Products, "Id", "Name", orderItem.ProductId);
             return View(orderItem);
         }
 
@@ -84,8 +84,8 @@ namespace eShop.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.orderID = new SelectList(db.Orders, "orderID", "address", orderItem.orderID);
-            ViewBag.productID = new SelectList(db.Products, "Id", "Name", orderItem.productID);
+            ViewBag.orderID = new SelectList(db.Orders, "orderID", "address", orderItem.OrderId);
+            ViewBag.productID = new SelectList(db.Products, "Id", "Name", orderItem.ProductId);
             return View(orderItem);
         }
 
@@ -102,8 +102,8 @@ namespace eShop.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.orderID = new SelectList(db.Orders, "orderID", "address", orderItem.orderID);
-            ViewBag.productID = new SelectList(db.Products, "Id", "Name", orderItem.productID);
+            ViewBag.orderID = new SelectList(db.Orders, "orderID", "address", orderItem.OrderId);
+            ViewBag.productID = new SelectList(db.Products, "Id", "Name", orderItem.ProductId);
             return View(orderItem);
         }
 

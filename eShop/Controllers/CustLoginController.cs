@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using eShop.Models;
+using eShop.Model;
 
 namespace eShop.Controllers
 {
     public class CustLoginController : Controller
     {
-        private DbModel db = new DbModel();
+        private FirdoosModel db = new FirdoosModel();
 
         // GET: CustLogin
         public ActionResult LoginForms()
         {
 
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             ViewBag.allCategories= allCategories;
             return View();
         }
@@ -29,7 +29,7 @@ namespace eShop.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> LoginForms(Customer newCustomer)
         {
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             ViewBag.allCategories = allCategories;
             if (db.Customers.Any(c => c.Phone == newCustomer.Phone))
             {
@@ -42,7 +42,7 @@ namespace eShop.Controllers
             {
                 return Json(new { success = "PhoneWrong", errorMessage = "The phone you entered either contains letters or does not start with 07. Please enter a valid phone number." });
             }
-            newCustomer.CompanyID=1;
+            newCustomer.CompanyId = 1;
             if (ModelState.IsValid)
             {
                 db.Customers.Add(newCustomer);
@@ -89,7 +89,7 @@ namespace eShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(Customer loginCustomer)
         {
-            List<Category> allCategories = db.Categories.Where(c => c.companyID == 1).ToList();
+            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             ViewBag.allCategories = allCategories;
             Customer user=db.Customers.First(c=>c.Phone==loginCustomer.Phone);
             if (user == null)
@@ -123,17 +123,17 @@ namespace eShop.Controllers
             }
         }
 
-        
+       //Have to check where this is being used. 
         private int addOrder(Customer newCustomer) {
 
             List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
             double totalPrice = 0.0;
             foreach (OrderItem item in allItems)
             {
-                totalPrice += item.price;
+                totalPrice += item.Price;
             }
             Session["customer"] = newCustomer;
-            Order newOrder = new Order() { companyID = 1, customerID = newCustomer.CustomerID, address = newCustomer.Address, country = newCustomer.Country, custName = newCustomer.CustName, deliverycost = 3, notes = "", orderDate = DateTime.Now, postcode = newCustomer.Postcode, phone = newCustomer.Phone, town = "baghdad", totalPrice = totalPrice };
+            Order newOrder = new Order() { CompanyId = 1, CustomerId = newCustomer.CustomerId, Address = newCustomer.Address, Country = newCustomer.Country, CustomerName = newCustomer.Name , DeliveryCost = 3, Notes = "", OrderDate = DateTime.Now, Postcode = newCustomer.Postcode, Phone = newCustomer.Phone, Town = "baghdad", TotalPrice = totalPrice };
             Session["order"]=newOrder;
             return allItems.Count;
 

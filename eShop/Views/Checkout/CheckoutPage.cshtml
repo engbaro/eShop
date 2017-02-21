@@ -1,8 +1,8 @@
-﻿@model eShop.Models.Customer
+﻿@model eShop.Model.Customer
 <div class="col-md-9 float-left">
     <h2>delivery address</h2>
     <div class="delivery-address">
-        @Model.CustName<br />
+        @Model.Name<br />
         @Model.Address<br />
         @Model.City<br />
         @Model.Postcode<br />
@@ -41,7 +41,7 @@
                         <tfoot>
                             <tr>
                                 <td class="col-sm-9">Subtotal</td>
-                                <td class="col-sm-3">@ViewBag.totalPrice</td>
+                                <td class="col-sm-3">@ViewBag.TotalPrice</td>
                             </tr>
                             <tr>
                                 <td class="col-sm-9">delivery</td>
@@ -77,11 +77,11 @@
 
                         <div class="form-group">
 
-                            @Html.LabelFor(model => model.CustName, "Full Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.Name, "Full Name", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10 input-group">
                                 <span class="input-group-addon "><i class="fa fa-user" aria-hidden="true"></i></span>
-                                @Html.EditorFor(model => model.CustName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CustName, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
