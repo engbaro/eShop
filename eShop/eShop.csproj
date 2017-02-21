@@ -211,6 +211,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702211232540_InitialCreate.cs" />
+    <Compile Include="Migrations\201702211232540_InitialCreate.Designer.cs">
+      <DependentUpon>201702211232540_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702211239279_productImages.cs" />
+    <Compile Include="Migrations\201702211239279_productImages.Designer.cs">
+      <DependentUpon>201702211239279_productImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
@@ -244,7 +253,15 @@
     <Compile Include="Models\ProductImage.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\FirdoosModel.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\OrderItem.cs" />
+    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\ProductImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\ConnectionStrings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -311,6 +328,14 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702211232540_InitialCreate.resx">
+      <DependentUpon>201702211232540_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702211239279_productImages.resx">
+      <DependentUpon>201702211239279_productImages.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
