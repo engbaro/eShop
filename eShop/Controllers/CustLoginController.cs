@@ -50,13 +50,14 @@ namespace eShop.Controllers
                 List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
                 Session["customer"] = newCustomer;
 
-                if (allItems.Count > 0)
+                if (allItems==null|| allItems.Count ==0)
                 {
-                    return Json(new { succes = "yes", url = Url.Action("CheckoutPage", "Checkout") });
+                    return Json(new { success = "yes", url = Url.Action("HomePage", "CustProducts") });
                 }
                 else
                 {
-                    return Json(new { succes = "yes", url = Url.Action("HomePage", "CustProducts") });
+                    return Json(new { success = "yes", url = Url.Action("CheckoutPage", "Checkout") });
+                   
                 }
 
             }
@@ -133,7 +134,7 @@ namespace eShop.Controllers
                 totalPrice += item.Price;
             }
             Session["customer"] = newCustomer;
-            Order newOrder = new Order() { CompanyId = 1, CustomerId = newCustomer.CustomerId, Address = newCustomer.Address, Country = newCustomer.Country, CustomerName = newCustomer.Name , DeliveryCost = 3, Notes = "", OrderDate = DateTime.Now, Postcode = newCustomer.Postcode, Phone = newCustomer.Phone, Town = "baghdad", TotalPrice = totalPrice };
+            Order newOrder = new Order() { CompanyId = 1, CustomerId = newCustomer.Id, Address = newCustomer.Address, Country = newCustomer.Country, CustomerName = newCustomer.Name , DeliveryCost = 3, Notes = "", OrderDate = DateTime.Now, Postcode = newCustomer.Postcode, Phone = newCustomer.Phone, Town = "baghdad", TotalPrice = totalPrice };
             Session["order"]=newOrder;
             return allItems.Count;
 

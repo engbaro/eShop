@@ -89,10 +89,11 @@ namespace eShop.Controllers
             count++;
             Session["OrderItem"] = list;
             Session["itemCount"] = count;
-            List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
-            List<Product> allProducts = db.Products.Where(c => c.CategoryId == product.CategoryId).ToList();
-            ViewBag.allCategories = allCategories;
-            return View(allProducts);
+           // List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
+            //List<Product> allProducts = db.Products.Where(c => c.CategoryId == product.CategoryId).ToList();
+           // ViewBag.allCategories = allCategories;
+           // return View(allProducts);
+           return RedirectToAction("ViewCategory",new { id=product.CategoryId });
         }
 
 
@@ -122,7 +123,8 @@ namespace eShop.Controllers
             List<Product> allProducts = db.Products.Where(c => c.CategoryId == id).ToList();
             List<int> allProductsIds=allProducts.Select(c=>c.Id).ToList();
             List<ProductImage> images =db.ProductImages.Where(c=>allProductsIds.Contains(c.ProductId)).Where(c => c.Main==true).ToList();
-            
+            // todo: check that each image has only one main photo and if it doesn't have any main photo then display the first one.
+            //images = allProductsIds.Select(pid => images.First(i => i.ProductId == pid)).ToList();
             if (!allProducts.Any() || allProducts == null)
             {
                 return HttpNotFound();
@@ -145,14 +147,21 @@ namespace eShop.Controllers
             {
                 //Throw error
             }
+      
+ 
+          
             List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             Product product = db.Products.FirstOrDefault(c => c.Id == id);
             if (product == null)
             {
                 return HttpNotFound();
             }
+
+            
             else
             {
+                List<ProductImage> images = db.ProductImages.Where(c => id == c.ProductId).ToList();
+                ViewBag.images=images;
                 ViewBag.allCategories = allCategories;
                 if (Request.IsAjaxRequest())
                 {

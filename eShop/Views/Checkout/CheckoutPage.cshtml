@@ -17,9 +17,11 @@
                     <table class="basket-table col-md-12">
                         <thead>
                             <tr>
-                                <h2>Items</h2>
-                                <a href="@Url.Action("ViewBasket", "CustProducts")" class="btn">Edit</a>
-                            </tr>
+                                <td>
+                                   <h2>Items</h2>
+                                  <a href="@Url.Action("ViewBasket", "CustProducts")" class="btn">Edit</a>
+                                 </td>
+                              </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in ViewBag.allProducts)

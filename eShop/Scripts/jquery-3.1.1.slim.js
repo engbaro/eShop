@@ -6932,7 +6932,8 @@ jQuery.each( [
 
 
 
-	// Strip and collapse whitespace according to HTML spec
+	// Strip and 
+ //whitespace according to HTML spec
 	// https://html.spec.whatwg.org/multipage/infrastructure.html#strip-and-collapse-whitespace
 	function stripAndCollapse( value ) {
 		var tokens = value.match( rnothtmlwhite ) || [];

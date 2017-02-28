@@ -38,10 +38,10 @@
   <div id="wrapper">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class=" admin-nav navbar navbar-inverse fixed-top bg-inverse" role="navigation">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -154,59 +154,54 @@
         </li>
       </ul>
       <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-          <li class="active">
-            <a href="#" id="dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+      <div id="navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav navbar-inverse bg-inverse">
+          <li class="nav-item active">
+            <a href="#" id="dashboard" class="nav-link"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
           </li>
 
-
-          <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#admin-product-menu"><i class="fa fa-fw fa-arrows-v"></i> Products <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="admin-product-menu" class="collapse">
-              <li>
-                 <a href="#" id="view-products">View Products</a>
+          <li class="nav-item">
+            <a href="javascript:;" data-toggle="collapse" data-target="#admin-product-menu" class="nav-link"><i class="fa fa-fw fa-arrows-v"></i> Products <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul class="collapse" id="admin-product-menu">
+              <li class="nav-item">
+                 <a  href="#" id="view-products">View Products</a>
               </li>
-              <li>
-                <a href="#" id="add-product" >Add a product</a>
+              <li class="nav-item">
+                <a  href="#" id="add-product" >Add a product</a>
               </li>
             </ul>
           </li>
 
-          <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#admin-order-menu"><i class="fa fa-fw fa-arrows-v"></i> Orders <i class="fa fa-fw fa-caret-down"></i></a>
+          <li class="nav-item">
+            <a href="javascript:;" data-toggle="collapse" data-target="#admin-order-menu" class="nav-link"><i class="fa fa-fw fa-arrows-v"></i> Orders <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="admin-order-menu" class="collapse">
-              <li>
-                <a href="#" id="view-orders" >orders</a>
-              </li>
+                <li>
+                    <a href="#" id="view-orders">Orders</a>
+                </li>
 
               <li>
-                <a href="#" id="add-orders">create an order</a>
+                  <a href="#" id="add-orders">Create an order</a>
               </li>
             </ul>
           </li>
 
-          <li>
-            <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+          <li class="nav-item">
+            <a class="nav-link" href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
           </li>
-          <li>
-            <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+          <li class="nav-item">
+            <a class="nav-link" href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
           </li>
-          <li>
-            <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+          <li class="nav-item">
+            <a class="nav-link" href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
           </li>
-          <li>
-            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+          <li class="nav-item">
+            <a class="nav-link" href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
           </li>
-          <li>
-            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+          <li class="nav-item">
+            <a class="nav-link" href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
           </li>
-
-          <li>
-            <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-          </li>
-          <li>
-            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+          <li class="nav-item">
+            <a class="nav-link"href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
           </li>
         </ul>
       </div>
@@ -220,12 +215,12 @@
   </div><!-- end of  wrapper-->
 
   <!-- jQuery -->
-  <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+  <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
   <!-- Bootstrap Core JavaScript -->
-  <script src="~/Scripts/bootstrap.min.js"></script>
+  <script src="~/Scripts/bootstrap.js"></script>
 
 
   <script src="~/Scripts/admin-home.js"></script>

@@ -1,21 +1,26 @@
 ﻿
 @model IEnumerable<eShop.Model.Product>
 
-    <div class="row col-md-8 view-category mx-auto">
+    <div class="row">
         @foreach (var item in Model)
             {
             <div class="col-sm-4 col-lg-3 col-md-3">
-              
+              @{bool imageExist=false;}
                 <a href="@Url.Action("ViewProduct", "CustProducts",
                          new { id = @item.Id})" id="@item.Id">
                     @foreach (var image in ViewBag.images)
                     {
                         if (@image.ProductId == @item.Id)
                         {
+                            imageExist = true;
                             <img class="rounded" src="/product-images/Thumbnails/@image.ImageLocation" alt="http://placehold.it/200x300">
                         }
+
                     }
                     
+                    @if(!imageExist){
+                    <img class="rounded" src="http://placehold.it/200x300" alt="@item.Name">
+                    }                       
                     <div class="caption">
                         <h4>$@item.Price</h4>
                         <h4>

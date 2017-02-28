@@ -505,7 +505,12 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 }(window.jQuery);
 
 /* ========================================================================
- * Bootstrap: collapse.js v3.0.0
+ * Bootstrap: 
+
+
+
+
+.js v3.0.0
  * http://twbs.github.com/bootstrap/javascript.html#collapse
  * ========================================================================
  * Copyright 2012 Twitter, Inc.

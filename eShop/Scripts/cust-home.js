@@ -1,14 +1,16 @@
-﻿var baseURL='http://localhost:52134/';
+﻿var baseURL='http://localhost:52134';
 $(document).ready(function () {
-
-   
-    $(window).scroll(function () { // check if scroll event happened
-        if ($(document).scrollTop() > 50) { // check if user scrolled more than 50 from top of the browser window
-            $(".main-nav").css("background-color", "#f8f8f8"); // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
-        } else {
-            $(".main-nav").css("background-color", "transparent"); // if not, change it back to transparent
-        }
+    $('.carousel').carousel({
+        interval: 2000
     });
+   
+  //  $(window).scroll(function () { // check if scroll event happened
+    //    if ($(document).scrollTop() > 50) { // check if user scrolled more than 50 from top of the browser window
+     //       $(".main-nav").css("background-color", "#f8f8f8"); // if yes, then change the color of class "navbar-fixed-top" to white (#f8f8f8)
+     //   } else {
+    //        $(".main-nav").css("background-color", "transparent"); // if not, change it back to transparent
+    //    }
+  //  });
 
 
     //ajax remove item
@@ -24,11 +26,12 @@ $(document).ready(function () {
                    
                     if (data.empty) {
                         tr.closest('table').remove();
+                        $('.checkout').remove();
                     }
                     else {
                         tr.remove();
                     }
-                window.history.pushState('1', "page 3", baseURL + 'CustProducts/ViewBasket/');
+                window.history.pushState('1', "page 3", baseURL + '/CustProducts/ViewBasket/');
             }
         });//end of ajax
 
@@ -44,7 +47,7 @@ $(document).ready(function () {
       data:{ "id": id },
       success: function (data) {
           $('#page-content').html(data);
-          window.history.pushState('1', "page 2", baseURL + 'CustProducts/ViewCategory/'+id);
+          window.history.pushState('1', "page 2", baseURL + '/CustProducts/ViewCategory/'+id);
       }
 
     });//end of ajax
@@ -65,7 +68,7 @@ function registerSuccess(response) {
 function registerFailure() {
     /*$('#register-form').addClass('show');
     $('#register-form').removeClass('fade');*/
-    $('#phoneError').text(response);
+    $('#phoneError').text("something went wrong");
 }
 
 function onComplete() {
@@ -74,8 +77,8 @@ function onComplete() {
 function loginSuccess(response) {
     debugger;
    
-    if (response.success = "yes") {
-        window.location.href =response.url;
+    if (response.success == "yes") {
+        window.location.href =baseURL+ response.url;
     }
     else {
         $('.error').removeClass('hide').html(response.errorMessage);

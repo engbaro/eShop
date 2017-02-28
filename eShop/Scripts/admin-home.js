@@ -9,23 +9,38 @@
 $(document).ready(function () {
 
     $("#add-more-photos").click(function () {
-        if ($('.files').length < 5) {
-            $(".add-more-photos-div").append('<input type="file" name="productImage" class="files"/> <br/>');
+        var fileCount = $('.files').length;
+        if (fileCount< 6) {
+            var id = fileCount + 1;
+     
+            $(".add-more-photos-div").append('<div><input type="radio" name="Main" class="main-image" id="main-' + id + '" disabled/><label for="main-' + id + '"></label><input type="file" name="productImage" id="' + id + '" class="files"/> <br/></div>');
         }
-     })
-    $('input[type="file"]').change(function (e) {
+    });
+    $('.form-horizontal').on("change", 'input:file', function (e) {
         debugger;
+        var id = e.target.id;
+        
         var re = /\..+$/;
         var ext = e.target.files[0].name.match(re);
         if (hash[ext]) {
             $("#submit-product-photo").attr("disabled",false);
+            $("#main-"+id).attr("disabled", false);
             return true;
         } else {
             alert("Please uploas an image of type png, jpg.");
             $("#submit-product-photo").attr("disabled", true);
-
+            $("#main-" + id).attr("disabled", true);
             return false;
         }
+    });
+    $('#upload-photos-form').submit(function () {
+        if ($('.files').length==0) {
+            alert('you should upload at least one photo for your product');
+            return false;
+        }
+        var id = $('input[name=Main]:checked', '#upload-photos-form').attr('id').split('-');
+        $('input[name=Main]:checked', '#upload-photos-form').val($('#' + id[1]).val().split('\\').pop());
+        return true;
     });
 
   //ajax view product

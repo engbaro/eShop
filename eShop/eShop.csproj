@@ -116,6 +116,7 @@
     <Content Include="Content\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\test.jpg" />
+    <Content Include="Content\plugins\jqzoom.css" />
     <Content Include="Content\plugins\morris.css" />
     <Content Include="Content\sb-admin.css" />
     <Content Include="Content\shop-homepage.css" />
@@ -170,6 +171,10 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\facebook-sdk.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -183,6 +188,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqzoom.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\plugins\flot\excanvas.min.js" />
     <Content Include="Scripts\plugins\flot\flot-data.js" />
@@ -203,6 +209,7 @@
     <Compile Include="Controllers\AdminOrdersController.cs" />
     <Compile Include="Controllers\AdminProductsController.cs" />
     <Compile Include="Controllers\AdminOrderItemsController.cs" />
+    <Compile Include="Controllers\AdminCategoriesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\CustLoginController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -281,7 +288,7 @@
     <Content Include="Views\AdminProducts\Details.cshtml" />
     <Content Include="Views\AdminProducts\Edit.cshtml" />
     <Content Include="Views\AdminProducts\Index.cshtml" />
-    <Content Include="Views\AdminProducts\ViewAll.cshtml" />
+    <Content Include="Views\AdminProducts\View.cshtml" />
     <Content Include="Views\AdminOrders\Create.cshtml" />
     <Content Include="Views\AdminOrders\Delete.cshtml" />
     <Content Include="Views\AdminOrders\Details.cshtml" />
@@ -309,6 +316,11 @@
     <Content Include="Views\Checkout\CheckoutPage.cshtml" />
     <Content Include="Views\Checkout\ConfirmCheckout.cshtml" />
     <Content Include="Views\AdminProducts\UploadPhoto.cshtml" />
+    <Content Include="Views\AdminCategories\Create.cshtml" />
+    <Content Include="Views\AdminCategories\Delete.cshtml" />
+    <Content Include="Views\AdminCategories\Details.cshtml" />
+    <Content Include="Views\AdminCategories\Edit.cshtml" />
+    <Content Include="Views\AdminCategories\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -320,7 +332,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\App_LocalResources\" />
     <Folder Include="obj\" />
-    <Folder Include="Views\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

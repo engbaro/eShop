@@ -5,19 +5,25 @@
  */
 
 /* Global Styles */
-
+.small-thumbnail {
+width:75px;
+height:100px;
+}
+.admin-nav {
+height:53px;
+}
 @media (min-width: 768px){
-  #wrapper {padding-right: 20px; padding-left: 0;}
+  #wrapper {padding-right: 10px; padding-left: 0;}
   .side-nav{right: 0;left: auto;}
 }
 body {
     margin-top: 100px;
-    background-color: #222;
+  /*  background-color: #222;*/
 }
 
 @media(min-width:768px) {
     body {
-        margin-top: 50px
+        margin-top: 50px;
         height:100%;
     }
 }
@@ -45,7 +51,7 @@ body {
     }
 
     #page-wrapper {
-        padding: 10px;
+        padding: 25px;
     }
 }
 
@@ -129,7 +135,7 @@ ul.alert-dropdown {
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #222;
+        background-color: #292b2c!important;
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
@@ -231,4 +237,130 @@ ul.alert-dropdown {
 
 .panel-yellow > a:hover {
     color: #df8a13;
+}
+
+/**styling checkboxes and radio buttons**/
+
+input[type=radio],
+input[type=checkbox]{
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+    
+input[type=radio].main-image ~ label:before,
+input[type=checkbox].main-image ~ label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f1db";
+    letter-spacing: 10px;
+    font-size: 1.2em;
+    color: #535353;
+    width: 1.4em;
+}
+
+input[type=radio].main-image:checked ~ label:before,
+input[type=checkbox].main-image:checked ~ label:before  {
+    content: "\f00c";
+    font-size: 1.2em;
+    color: darkgreen;
+    letter-spacing: 5px;
+}
+input[type=checkbox].main-image~ label:before {        
+    content: "\f096";
+}
+input[type=checkbox].main-image:checked ~ label:before {
+    content: "\f046";        
+    color: darkgreen;
+}
+input[type=radio].main-image:focus ~ label:before,
+input[type=checkbox].main-image:focus ~ label:before,
+input[type=radio].main-image:focus ~ label,
+input[type=checkbox].main-image:focus ~ label
+{                
+    color: green;
+}
+.hide {
+    display:none;
+}
+/**test view products*/
+
+/*	--------------------------------------------------
+	:: Table Filter
+	-------------------------------------------------- */
+.panel {
+	border: 1px solid #ddd;
+	background-color: #fcfcfc;
+}
+.panel .btn-group {
+	margin: 15px 0 30px;
+}
+.panel .btn-group .btn {
+	transition: background-color .3s ease;
+}
+.table-admin {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+}
+.table-admin tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+.table-admin tbody tr td {
+	padding: 10px;
+	vertical-align: middle;
+	border-top-color: #eee;
+}
+.table-admin tbody tr.selected td {
+	background-color: #eee;
+    border-right:50px!important;
+}
+.table-admin tr td:first-child {
+	width: 38px;
+}
+.table-admin tr td:nth-child(2) {
+	width: 35px;
+}
+.table-admin .star {
+	color: #ccc;
+	text-align: center;
+	display: block;
+}
+
+.table-admin .star:hover {
+	color: #ccc;
+}
+.table-admin .star.star-checked:hover {
+	color: #F0AD4E;
+}
+.table-admin .media-photo {
+	width: 35px;
+}
+.table-admin .media-body {
+    display: block;
+    /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+}
+.table-admin .media-meta {
+	font-size: 11px;
+	color: #999;
+}
+.table-admin .media .title {
+	color: #2BBCDE;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+}
+.table-admin .media .title span {
+	font-size: .8em;
+	margin-right: 20px;
+}
+
+.table-admin .media .summary {
+	font-size: 14px;
 }

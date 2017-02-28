@@ -6,52 +6,77 @@
     <div class="content-wrapper">
         <div class="item-container">
             <div class="container">
-                <div class="col-md-12">
-                    <div class="product col-md-3 service-image-left">
+                <div class="row col-md-12">
 
-                        <center>
-                            <img id="item-display" src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-                        </center>
+                    <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+                       
+                            <!-- me art lab slider -->
+                            <div class='carousel-inner '>
+                                @{var i = 0; }
+@foreach (var image in ViewBag.images)
+{
+
+    if (@image.ProductId == @Model.Id)
+    {
+        var itemClass = i++ == 0 ? "carousel-item product-view-item active" : "carousel-item";
+                                <div class='@itemClass'>
+                                    <img class="d-block img-fluid" src='/product-images/Originals/@image.ImageLocation' alt='' data-zoom-image="/product-images/Originals/@image.ImageLocation" />
+                                </div>
+    }
+}
+                                <script>
+//  $("#zoom_05").elevateZoom({ zoomType    : "inner", cursor: "crosshair" });
+                                </script>
+                            </div>
+
+                            <!-- sag sol -->
+                            <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+                                <span class='glyphicon glyphicon-chevron-left'></span>
+                            </a>
+                            <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+                                <span class='glyphicon glyphicon-chevron-right'></span>
+                            </a>
+                       
+                        @{int count=0;}
+                        <!-- thumb -->
+                        <ol class='carousel-indicators mCustomScrollbar meartlab'>
+                            @foreach (var image in ViewBag.images)
+                            {
+                                if (@image.ProductId == @Model.Id)
+                                {
+                                    <li data-target='#carousel-custom' data-slide-to='@count'><img src='/product-images/Thumbnails/@image.ImageLocation' alt='' /></li>
+                                    count=count+1;
+                                }
+                            }
+                        </ol>
                     </div>
 
-                    <div class="container service1-items col-sm-2 col-md-2 pull-left">
-                        <center>
-                            <a id="item-1" class="service1-item">
-                                <img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-                            </a>
-                            <a id="item-2" class="service1-item">
-                                <img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-                            </a>
-                            <a id="item-3" class="service1-item">
-                                <img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-                            </a>
-                        </center>
-                    </div>
-                </div>
 
-                <div class="col-md-7">
-                  @using (Html.BeginForm("OrderProduct", "CustProducts", FormMethod.Post))
-                  {
 
-                    <div class="product-title">@Model.Name</div>
-                    <div class="product-desc">@Model.Description</div>
+                    <div class="col-md-4">
+                        @using (Html.BeginForm("OrderProduct", "CustProducts", FormMethod.Post))
+                        {
+
+                            <div class="product-title">@Model.Name</div>
+                            <br/>
                     <!--div class="product-rating"><i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star gold"></i> <i class="fa fa-star-o"></i> </div>-->
-                    <hr>
-                    <div class="product-price">$ @Model.Price</div>
-                   <!--<div class="product-stock">In Stock</div>--> 
-                    <hr>
-                    @Html.HiddenFor(Model => Model.Id)
-                    <div class="btn-group cart">
-                        <button type="submit" class="btn btn-success" id="add-to-basket">
-                            Add to cart
-                        </button>
-                    </div> 
-                  }
-                    <div class="btn-group wishlist">
-                        <button type="button" class="btn btn-danger">
-                            Add to wishlist
-                        </button>
+                          
+                            <div class="product-price">$ @Model.Price</div>
+                   <!--<div class="product-stock">In Stock</div>-->
+                            <br/>
+                            <div class="product-desc">@Model.Description</div>
+                            <br/>
+                            <br/>
+                            @Html.HiddenFor(Model => Model.Id)
+                            <div class="btn-group cart">
+                                <button type="submit" class="btn btn-success" id="add-to-basket">
+                                    Add to cart
+                                </button>
+                            </div>
+                        }
+
                     </div>
+
                 </div>
             </div>
         </div>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<eShop.Model.Product>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>View all products</h2>
+
+<div class="table-container">
+    <table class="table table-admin">
+    <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>price</th>
+        <th>photo</th>
+
+    </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr data-status="pagado">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @{ bool imageExist=false;}
+                        @foreach (var image in ViewBag.images)
+                        {
+                            if (@image.ProductId == @item.Id)
+                            {
+                                imageExist = true;
+                                <img class="rounded small-thumbnail" src="/product-images/Thumbnails/@image.ImageLocation" alt="http://placehold.it/75x100">
+                            }
+
+
+                        }
+
+                        @if (!imageExist)
+                        {
+                            <img class="rounded" src="http://placehold.it/75x100" alt="@item.Name">
+                        }                       
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id },new { @class= "btn btn-success btn-admin" }) 
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success btn-admin" }) 
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-success btn-admin" })
+                    </td>
+                </tr>
+           
+            }</tbody></table>
+            </div>
+        

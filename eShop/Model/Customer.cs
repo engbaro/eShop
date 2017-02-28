@@ -17,8 +17,6 @@ namespace eShop.Model
     public int Id { get; set; }
         [Required]
         public int CompanyId { get; set; }
-        [Required]
-        public int CustomerId { get; set; }
 
         [Required]
     public string Name { get; set; }
