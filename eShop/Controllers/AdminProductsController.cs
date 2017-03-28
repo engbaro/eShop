@@ -165,7 +165,7 @@ namespace eShop.Controllers
             }
             db.ProductImages.AddRange(images);
             db.SaveChanges();
-            return RedirectToAction("Edit",productID);
+            return RedirectToAction("Edit",new { id=productID });
         }
         // POST: test/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -214,13 +214,13 @@ namespace eShop.Controllers
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public ActionResult Edit([Bind(Include = "Id,Name,Description,Price")] Product product)
+    public ActionResult Edit([Bind(Include = "Id,CategoryId,Name,Description,Price")] Product product)
     {
       if (ModelState.IsValid)
       {
         db.Entry(product).State = EntityState.Modified;
         db.SaveChanges();
-        return RedirectToAction("Index");
+        return RedirectToAction("ViewAll");
       }
 
       if (Request.IsAjaxRequest())

@@ -29,7 +29,7 @@ namespace eShop.Controllers
                     //ViewBag.message = "There are no items in your basket. please order something before coming to checkout page.";
                     return View();
                 }
-                Customer currentCustomer=(Customer)Session["customer"];
+                AppUser currentCustomer=(AppUser)Session["customer"];
                 if (currentCustomer == null)
                 {
                     ViewBag.error="emptyCustomer";
@@ -54,10 +54,10 @@ namespace eShop.Controllers
             {
                 List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
                 ViewBag.allCategories = allCategories;
-                Customer currentCustomer = (Customer)Session["customer"];
+                AppUser currentCustomer = (AppUser)Session["customer"];
                 List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
                 double totalPrice = allItems.Sum(x => x.Price);
-                Order newOrder = new Order() { Address = currentCustomer.Address, Town = currentCustomer.City, Postcode = currentCustomer.Postcode, Notes = "", Country = currentCustomer.Country, CustomerName= currentCustomer.Name, OrderDate = DateTime.Now, CustomerId = currentCustomer.Id, Phone = currentCustomer.Phone, DeliveryCost = 3, CompanyId = 1, TotalPrice = totalPrice };
+                Order newOrder = new Order() { Address = currentCustomer.Address, Town = currentCustomer.City, Postcode = currentCustomer.Postcode, Notes = "", Country = currentCustomer.Country, CustomerName= currentCustomer.UserName, OrderDate = DateTime.Now, UserId = currentCustomer.Id, Phone = currentCustomer.PhoneNumber, DeliveryCost = 3, CompanyId = 1, TotalPrice = totalPrice };
                 db.Orders.Add(newOrder);
                 db.SaveChanges();
                 allItems.ForEach(x => x.OrderId = newOrder.Id);
@@ -71,21 +71,21 @@ namespace eShop.Controllers
         }
 
 
-        public ActionResult ChangeAddress(Customer newAddress)
+        public ActionResult ChangeAddress(AppUser newAddress)
         {
             try
             {
 
                 List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
                 ViewBag.allCategories = allCategories;
-                Customer currentCustomer = (Customer)Session["customer"];
+                AppUser currentCustomer = (AppUser)Session["customer"];
                 //add check here if session is empty
 
                 currentCustomer.Address=newAddress.Address;
                 currentCustomer.City=newAddress.City;
                 currentCustomer.Country=newAddress.Country;
-                currentCustomer.Phone = newAddress.Phone;
-                currentCustomer.Name=newAddress.Name;
+                currentCustomer.PhoneNumber = newAddress.PhoneNumber;
+                currentCustomer.UserName=newAddress.UserName;
                 Session["customer"]=currentCustomer;
                 /*
                 List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];

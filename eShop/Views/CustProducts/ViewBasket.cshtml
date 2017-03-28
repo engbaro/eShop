@@ -1,63 +1,65 @@
-﻿
-@model IEnumerable<eShop.Model.OrderItem>
-   <div class="col-md-9">
+﻿@model IEnumerable<eShop.Model.OrderItem>
+<div class="col-md-9">
+    <div class="error">
+
+    </div>
+    @if (ViewBag.message != null)
+    {
+        <br />
+        <br />
+        <div class="alert alert-danger" role="alert">@ViewBag.message</div>
+
+    }
+    else
+    {
+
+        <table class="basket-table col-md-12">
+            <thead>
+                <tr>
+                    <th>Product Photo</th>
+                    <th>Product name</th>
+                    <th>Product Price</th>
+                    <th>Delete product</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                     <tr class="basket-row">
+
+                        @{var productID = @item.ProductId;}
+
+                            @foreach (var product in ViewBag.allProducts)
+                            {
+                                if (@product.Product.Id == productID)
+                                {
 
 
-       <div class="error">
-
-       </div>
-       @if(ViewBag.message != null)
-       {
-       <br/>
-       <br/>
-      
-       <div class="alert alert-danger" role="alert">@ViewBag.message</div>
-       
-       }
-       else{
-       
-       <table class="basket-table col-md-12">
-           <thead>
-               <tr>
-                   <th>Product Photo</th>
-                   <th>Product name</th>
-                   <th>Product Price</th>
-                   <th>Delete product</th>
-               </tr>
-           </thead>
-           <tbody>
-               @foreach (var item in Model)
-               {
-                   var productID = @item.ProductId;
-                   <tr class="basket-row">
-                       <td class="col-md-4">
-                           <a href="#" class="thumbnail">
-                               <img src="~/Content/Images/test.jpg" alt="productImage" class="img-thumbnail">
-                           </a>
-                       </td>
-                       <td class="col-md-4">
-                           @foreach (var product in ViewBag.allProducts)
-                           {
-                               if (@product.Id == productID)
-                               {
-                                   @product.Name
-                               }
-
+                        <td class="col-md-4">
+                            <a href="#" class="thumbnail">
+                                <img src="/product-images/Thumbnails/@product.ProductImage.ImageLocation" alt="productImage" class="img-thumbnail">
+                            </a>
+                        </td>
+                        <td class="col-md-4">
+                            @product.Product.Name
+                        </td>
+                        <td class="col-md-2">@item.Price</td>
+                        <td class="col-md-2"><a class="remove-item" id="@item.Id"> <i class="fa fa-times fa-lg" aria-hidden="true"></i></a>  </td>
+                   
                            }
-                       </td>
-                       <td class="col-md-2">@item.Price</td>
-                       <td class="col-md-2"><a class="remove-item" id="@item.Id"> <i class="fa fa-times fa-lg" aria-hidden="true"></i></a>  </td>
+                        }
                    </tr>
-               }
+                  }
+             
+            </tbody>
 
-           </tbody>
-
-       </table>
+        </table>
 
 
-       <br/>
-       <br/>
-       <a href="@Url.Action("LoginForms", "CustLogin")" class="checkout btn btn-primary">proceed to checkout</a>
-       }
+        <br />
+        <br />
+        <a href="@Url.Action("LoginForms", "CustLogin")" class="checkout btn btn-primary">proceed to checkout</a>
+    }
 
-   </div>
+</div>

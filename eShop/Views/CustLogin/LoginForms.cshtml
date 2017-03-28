@@ -1,4 +1,4 @@
-﻿@model eShop.Model.Customer
+﻿@model eShop.Model.RegisterAndLoginViewModel
 
 <ul class="nav justify-content-center">
     <li>
@@ -16,7 +16,7 @@
                 </button>
             </div>
             <div class="modal-body">
-               @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "post", OnSuccess = "loginSuccess", OnFailure = "registerFailure", OnComplete = "onComplete" }))
+               @using (Ajax.BeginForm("RegisterCustomer","Account",new AjaxOptions { HttpMethod = "post", OnSuccess = "loginSuccess", OnFailure = "registerFailure", OnComplete = "onComplete" }))
                {
                     @Html.AntiForgeryToken()
 
@@ -28,11 +28,11 @@
 
                         <div class="form-group">
 
-                            @Html.LabelFor(model => model.Name, "Full Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.FullName, "Full Name", htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10 input-group">
                                 <span class="input-group-addon "><i class="fa fa-user" aria-hidden="true"></i></span>
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -49,14 +49,23 @@
 
                         <div class="form-group">
 
-                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new {@class = "control-label col-md-2"})
                             <div class="col-md-10 input-group">
                                 <span class="input-group-addon "><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                @Html.PasswordFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                @Html.PasswordFor(model => model.ConfirmPassword, new {htmlAttributes = new {@class = "form-control"}})
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new {@class = "text-danger"})
                             </div>
                         </div>
 
+                        <div class="form-group">
+
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10 input-group">
+                                <span class="input-group-addon "><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10  input-group">
@@ -80,10 +89,10 @@
                             <div class="col-md-10  input-group">
                                 <span class="input-group-addon "><i class="fa fa-map-marker" aria-hidden="true"></i></span>
                                 @Html.EditorFor(model => model.Postcode, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
+                               @Html.ValidationMessageFor(model => model.Postcode, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                          
                         <div class="form-group">
                             @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10  input-group">
@@ -94,11 +103,11 @@
                         </div>
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10  input-group">
                                 <span class="input-group-addon "><i class="fa fa-phone" aria-hidden="true"></i></span>
-                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
                             </div>
                         </div>
 
@@ -124,62 +133,8 @@
 <div class="modal fade" id="login-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog " role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-               
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-
-               
-            </div>
-
-            <div class="alert alert-danger error hide"></div>
-@using (Ajax.BeginForm("Login", new AjaxOptions { HttpMethod = "post", OnSuccess = "loginSuccess", OnFailure = "loginFailure" }))
-{
-            <div class="modal-body">
-              
-                    @Html.AntiForgeryToken()
-
-
-                    <div class="form-horizontal">
-                        <h4>Login to your account</h4>
-                       
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10  input-group">
-                                <span class="input-group-addon "><i class="fa fa-phone" aria-hidden="true"></i></span>
-                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10 input-group">
-                                <span class="input-group-addon "><i class="fa fa-lock" aria-hidden="true"></i></span>
-                                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                       <!--<div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" value="Login" class="btn btn-pr" />
-                            </div>
-                        </div>--> 
-                    </div>
-                
-
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-          }
+     
+       
         </div>
     </div>
 </div>

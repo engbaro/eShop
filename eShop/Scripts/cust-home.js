@@ -37,6 +37,20 @@ $(document).ready(function () {
 
     });//end of click
 
+    $("#login").click(function() {
+        $("#login-form .modal-dialog .modal-content").empty();
+        $.ajax({
+            url: '/Account/Login/',
+            method: 'get',
+            success: function (data) {
+                $("#login-form .modal-dialog .modal-content").append(data);
+               
+            }
+
+        });//end of ajax
+
+    });
+
   //ajax view category
     $(".category").click(function () {
 

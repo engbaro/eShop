@@ -25,24 +25,26 @@
                {
                    var productID = @item.ProductId;
                    <tr class="basket-row">
-                       <td class="col-md-4">
-                           <a href="#" class="thumbnail">
-                               <img src="~/Content/Images/test.jpg" alt="productImage" class="img-thumbnail">
-                           </a>
-                       </td>
-                       <td class="col-md-4">
-                           @foreach (var product in ViewBag.allProducts)
-                           {
-                               if (@product.Id == productID)
-                               {
-                                   @product.Description
-                               }
-
-                           }
-                       </td>
+                      @foreach (var product in ViewBag.allProducts)
+                      {
+                          if (@product.Id == productID)
+                          {
+                               <td class="col-md-4">
+                                   <a href="#" class="thumbnail">
+                                       <img src="/product-images/Thumbnails/@product.ProductImage.ImageLocation" alt="productImage" class="img-thumbnail">
+                                   </a>
+                               </td>
+                               <td class="col-md-4">                                     
+                                           @product.Description
+ 
+                        </td>
+                          }
+                      }
                        <td class="col-md-2">@item.Price</td>
                        <td class="col-md-2"><a href="#" class="remove-item" id="@item.Id"> <i class="fa fa-times fa-lg" aria-hidden="true"></i></a></td>
-                   </tr>
+                      
+
+                     </tr>
                }
 
            </tbody>

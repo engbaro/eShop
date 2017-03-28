@@ -18,7 +18,10 @@ namespace eShop.Controllers
         // GET: CustLogin
         public ActionResult LoginForms()
         {
-
+            AppUser currentCustomer=(AppUser)Session["customer"];
+            if (currentCustomer != null) {
+                RedirectToAction("CheckoutPage", "Checkout");
+            }
             List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             ViewBag.allCategories= allCategories;
             return View();
@@ -27,25 +30,25 @@ namespace eShop.Controllers
         //[Bind(Include = "ConfirmPassword,CustName,Password,Address,City,Postcode,Phone,Country")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> LoginForms(Customer newCustomer)
+        public async Task<ActionResult> LoginForms(AppUser newCustomer)
         {
             List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             ViewBag.allCategories = allCategories;
-            if (db.Customers.Any(c => c.Phone == newCustomer.Phone))
+            if (db.Users.Any(c => c.PhoneNumber == newCustomer.PhoneNumber))
             {
 
                 /*ViewBag.sucess="Phone already exist! please login to your account or create another one.";
                 return View(newCustomer);*/
                 return Json(new { success = "PhoneExist", errorMessage = "The phone you entered already exist <a href='#' id='login-from-register'>Login</a> to your account" });
             }
-            else if (!newCustomer.Phone.Any(c => char.IsDigit(c)) || !newCustomer.Phone.Trim().StartsWith("07"))
+            else if (!newCustomer.PhoneNumber.Any(c => char.IsDigit(c)) || !newCustomer.PhoneNumber.Trim().StartsWith("07"))
             {
                 return Json(new { success = "PhoneWrong", errorMessage = "The phone you entered either contains letters or does not start with 07. Please enter a valid phone number." });
             }
             newCustomer.CompanyId = 1;
             if (ModelState.IsValid)
             {
-                db.Customers.Add(newCustomer);
+                db.Users.Add(newCustomer);
                 await db.SaveChangesAsync();
                 List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
                 Session["customer"] = newCustomer;
@@ -71,13 +74,13 @@ namespace eShop.Controllers
             return View(newCustomer);
         }
         // GET: CustLogin/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = await db.Customers.FindAsync(id);
+            AppUser customer =  db.Users.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -88,18 +91,18 @@ namespace eShop.Controllers
         //[Bind(Include = "ConfirmPassword,CustName,Password,Address,City,Postcode,Phone,Country")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(Customer loginCustomer)
+        public ActionResult Login(AppUser loginCustomer)
         {
             List<Category> allCategories = db.Categories.Where(c => c.CompanyId == 1).ToList();
             ViewBag.allCategories = allCategories;
-            Customer user=db.Customers.First(c=>c.Phone==loginCustomer.Phone);
+            AppUser user=db.Users.First(c=>c.PhoneNumber==loginCustomer.PhoneNumber);
             if (user == null)
             {
                 return Json(new { sucess = "NotRegistered", errorMessage = "we don't have an account with this phone number. click <a href='#' id='register-from-login'>here</a> to register" });
             }
             else
             {
-                Customer verifyPassword=db.Customers.FirstOrDefault(c=>(c.Phone==loginCustomer.Phone) && (c.Password==loginCustomer.Password));
+                AppUser verifyPassword=db.Users.FirstOrDefault(c=>(c.PhoneNumber==loginCustomer.PhoneNumber) && (c.PasswordHash==loginCustomer.PasswordHash));
                 if (verifyPassword == null)
                 {
                     return Json(new { sucess = "WrongPassword", errorMessage = "The password you entered is not correct" });
@@ -125,7 +128,7 @@ namespace eShop.Controllers
         }
 
        //Have to check where this is being used. 
-        private int addOrder(Customer newCustomer) {
+        private int addOrder(AppUser newCustomer) {
 
             List<OrderItem> allItems = (List<OrderItem>)Session["OrderItem"];
             double totalPrice = 0.0;
@@ -134,7 +137,7 @@ namespace eShop.Controllers
                 totalPrice += item.Price;
             }
             Session["customer"] = newCustomer;
-            Order newOrder = new Order() { CompanyId = 1, CustomerId = newCustomer.Id, Address = newCustomer.Address, Country = newCustomer.Country, CustomerName = newCustomer.Name , DeliveryCost = 3, Notes = "", OrderDate = DateTime.Now, Postcode = newCustomer.Postcode, Phone = newCustomer.Phone, Town = "baghdad", TotalPrice = totalPrice };
+            Order newOrder = new Order() { CompanyId = 1, UserId = newCustomer.Id, Address = newCustomer.Address, Country = newCustomer.Country, CustomerName = newCustomer.UserName , DeliveryCost = 3, Notes = "", OrderDate = DateTime.Now, Postcode = newCustomer.Postcode, Phone = newCustomer.PhoneNumber, Town = "baghdad", TotalPrice = totalPrice };
             Session["order"]=newOrder;
             return allItems.Count;
 

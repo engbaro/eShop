@@ -37,14 +37,18 @@ namespace eShop.Controllers
                         ViewBag.message = "There are no items in your basket.";
                         return View();
                     }
-                    List<Product> allProducts = db.Products.Where(c => allOrderItemsProductsIDs.Contains(c.Id)).ToList();
+
+                    var allProducts = db.Products.Join(db.ProductImages,product=>product.Id, ProductImage=> ProductImage.ProductId,(Product, ProductImage)=>new ProjectData.ProductImageBean{ Product=Product, ProductImage = ProductImage }).Where(c => (allOrderItemsProductsIDs.Contains(c.Product.Id))&& c.ProductImage.Main==true).ToList();
+                   // List<ProductImage> images=db.ProductImages.Where(c=>(allOrderItemsProductsIDs.Contains(c.ProductId)) && (c.Main == true)).ToList();
+
                     if (!allProducts.Any() || allProducts == null)
                     {
                         return HttpNotFound();
                     }
+                    
                     else
                     {
-
+                       // ViewBag.images = images;
                         ViewBag.allProducts = allProducts;
                         if (Request.IsAjaxRequest())
                         {
@@ -218,7 +222,8 @@ namespace eShop.Controllers
                     return Json(new { empty = true, message = "There are no items in your basket." });
                 }
                 int[] allOrderItemsProductsIDs = allOrderItems.Select(c => c.ProductId).ToArray();
-                List<Product> allProducts = db.Products.Where(c => allOrderItemsProductsIDs.Contains(c.Id)).ToList();
+                //List<Product> allProducts = db.Products.Where(c => allOrderItemsProductsIDs.Contains(c.Id)).ToList();
+                var allProducts = db.Products.Join(db.ProductImages, product => product.Id, ProductImage => ProductImage.ProductId, (Product, ProductImage) => new ProjectData.ProductImageBean { Product = Product, ProductImage = ProductImage }).Where(c => (allOrderItemsProductsIDs.Contains(c.Product.Id)) && c.ProductImage.Main == true).ToList();
                 ViewBag.allProducts = allProducts;
                 return Json(new { empty = false, message = "An item was removed from your basket" });
             }

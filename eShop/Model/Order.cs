@@ -18,7 +18,7 @@ namespace eShop.Model
     public int Id { get; set; }
 
     [Required]
-    public int CustomerId { get; set; }
+    public int UserId { get; set; }
     [Required]
     public DateTime OrderDate { get; set; }
     [Required]
@@ -42,7 +42,9 @@ namespace eShop.Model
         [Required]
         public int CompanyId { get; set; }
 
-    public virtual Customer Customer { get; set; }
+        
+
+    public virtual AppUser AppUser { get; set; }
 
     public virtual ICollection<OrderItem> OrderItems { get; set; }
   }
