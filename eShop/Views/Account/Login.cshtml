@@ -12,7 +12,7 @@
     </button>
 </div>
 
-<div class="alert alert-danger error hide"></div>
+@*<div class="alert alert-danger error hide"></div>*@
 
 @using (Ajax.BeginForm("Login", "Account", new AjaxOptions { HttpMethod = "post", OnSuccess = "loginSuccess", OnFailure = "loginFailure" }))
 {

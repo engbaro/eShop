@@ -87,7 +87,7 @@ namespace eShop.Controllers
             if (ModelState.IsValid)
             {
               
-                var user = new AppUser { UserName = model.Email, Email = model.Email,City = "baghdad",Address="44-46fieldgate st.",Country="iraq",Postcode="e1 1es",CompanyId = 1};
+                var user = new AppUser { UserName = model.Email, Email = model.Email,City = model.City,Address=model.Address ,Country=model.Country,Postcode=model.Postcode,CompanyId = 1};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 await UserManager.AddToRoleAsync(user.Id, "Admin");
                 if (result.Succeeded)
@@ -244,7 +244,7 @@ namespace eShop.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(RegisterAndLoginViewModel model)
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -254,6 +254,8 @@ namespace eShop.Controllers
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.PhoneNumber, model.Password, model.RememberMe, shouldLockout: false);
+
+            
 
             switch (result)
             {

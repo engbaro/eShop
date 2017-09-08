@@ -50,7 +50,6 @@ namespace eShop.Model
     {
         [Required]
         [Display(Name = "Phone Number")]
-        [EmailAddress]
         public string PhoneNumber { get; set; }
 
         [Required]
